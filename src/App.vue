@@ -3,19 +3,19 @@ import Button from 'primevue/button';
   <div class="container">
     <h1 class="title">1 de 3: Selecciona tu avatar</h1>
     <div class="listaAvatares">
-      <button @click="seleccionarAvatar(avatarList[0])"><img src="../src/components/avatars/Avatar1.png"
-          alt=""></button>
-      <button @click="seleccionarAvatar(avatarList[1])"><img src="../src/components/avatars/Avatar2.png"
-          alt=""></button>
-      <button @click="seleccionarAvatar(avatarList[2])"><img src="../src/components/avatars/Avatar3.png"
-          alt=""></button>
-      <button @click="seleccionarAvatar(avatarList[3])"><img src="../src/components/avatars/Avatar4.png"
-          alt=""></button>
-      <button @click="seleccionarAvatar(avatarList[4])"><img src="../src/components/avatars/Avatar5.png"
-          alt=""></button>
+      <button :class="{ seleccionado: avatarSeleccionado === avatarList[0] }"
+        @click=" seleccionarAvatar(avatarList[0])"><img src="../src/components/avatars/Avatar1.png" alt=""></button>
+      <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }"
+        @click="seleccionarAvatar(avatarList[1])"><img src="../src/components/avatars/Avatar2.png" alt=""></button>
+      <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }"
+        @click="seleccionarAvatar(avatarList[2])"><img src="../src/components/avatars/Avatar3.png" alt=""></button>
+      <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }"
+        @click="seleccionarAvatar(avatarList[3])"><img src="../src/components/avatars/Avatar4.png" alt=""></button>
+      <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }"
+        @click="seleccionarAvatar(avatarList[4])"><img src="../src/components/avatars/Avatar5.png" alt=""></button>
     </div>
 
-    <Button label="Submit" class="start-button" @click="onStartClick">Empezar</Button>
+    <Button label="Submit" class="start-button" @click="onStartClick">Siguiente</Button>
   </div>
 </template>
 
@@ -37,8 +37,8 @@ export default {
     seleccionarAvatar(avatar) {
       this.avatarSeleccionado = avatar;
       console.log(this.avatarSeleccionado);
-      // guardar el avatar seleccionado
       // crear un borde al boton del avatar seleccionado
+
 
     }
   },
@@ -52,6 +52,12 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  gap: 25px;
+}
+
+.listaAvatares {
+  display: flex;
+  gap: 15px;
 }
 
 .title {
@@ -60,8 +66,14 @@ export default {
   margin-bottom: 2rem;
 }
 
+
+
 .start-button:hover {
   background-color: #f1e0d1;
   color: #cda582;
+}
+
+.seleccionado {
+  border: 4px solid orange;
 }
 </style>
