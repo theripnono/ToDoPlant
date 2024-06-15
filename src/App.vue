@@ -1,14 +1,21 @@
 <template>
   <div class="container">
-    <h2>To Do list</h2>
-    <button @click="agregarTarea">Crear tarea</button>
-
-    <div class="campo">
-      <div v-for="(parcela, index) in parcelas" :key="index" class="parcela" :style="estiloParcela(index)">
-      </div>
+    <div class="tareas">
+      <h2>To Do list</h2>
+      <button @click="agregarTarea">Crear tarea</button>
     </div>
 
-    <p>Tus tareas: {{ tareas.length }}</p>
+    <div class="background-campo">
+
+      <div class="campo">
+        <div v-for="(parcela, index) in parcelas" :key="index" class="parcela" :style="estiloParcela(index)">
+        </div>
+      </div>
+      <p>Tus tareas: {{ tareas.length }}</p>
+    </div>
+
+
+
   </div>
 </template>
 
@@ -51,23 +58,30 @@ export default {
   gap: 25px;
 }
 
+.tareas {
+  display: flex;
+  width: 50%;
+}
+
+
+.background-campo {
+  /* display: flex; */
+  background-color: green;
+  height: 100vh;
+  width: 50%;
+}
+
 .campo {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* Ajusta el número de columnas según necesites */
   grid-gap: 5px;
-  /* Ajusta el espacio entre parcelas */
   width: 200px;
-  /* Ajusta el ancho del campo */
 }
 
 .parcela {
   width: 40px;
-  /* Ajusta el ancho de la parcela */
   height: 40px;
-  /* Ajusta la altura de la parcela */
   background-size: cover;
-  /* Ajusta la imagen al tamaño de la parcela */
 }
 </style>
 
