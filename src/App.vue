@@ -1,8 +1,18 @@
 <template>
   <div class="container">
     <div class="tareas">
-      <h2>To Do list</h2>
-      <button @click="agregarTarea">Crear tarea</button>
+      <div>
+        <h2>To Do list</h2>
+
+      </div>
+      <div>
+        <Button label="Primary" @click="agregarTarea">Crear tarea</Button>
+
+      </div>
+      <div class="avatar-container">
+        <img src="../src/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
+      </div>
+
     </div>
 
     <div class="background-campo">
@@ -11,7 +21,9 @@
         <div v-for="(parcela, index) in parcelas" :key="index" class="parcela" :style="estiloParcela(index)">
         </div>
       </div>
-      <p>Tus tareas: {{ tareas.length }}</p>
+      <div class="numTareas">
+        <p>Tus tareas: {{ tareas.length }}</p>
+      </div>
     </div>
 
 
@@ -55,20 +67,51 @@ export default {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  gap: 25px;
 }
 
 .tareas {
   display: flex;
+  flex-direction: column;
+  height: 100vh;
   width: 50%;
 }
 
+.tareas h2 {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.tareas h2,
+button {
+  margin-left: 50px;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: flex-end;
+  margin-top: auto;
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+
+.avatar {
+  width: 50px;
+}
 
 .background-campo {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: green;
   height: 100vh;
   width: 50%;
+}
+
+.numTareas p {
+  display: flex;
+
+  color: white;
 }
 
 .campo {
