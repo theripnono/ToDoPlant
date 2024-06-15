@@ -16,7 +16,8 @@
     </div>
 
     <div class="background-campo">
-
+      <div class="borde-campo">
+      </div>
       <div class="campo">
         <div v-for="(parcela, index) in parcelas" :key="index" class="parcela" :style="estiloParcela(index)">
         </div>
@@ -103,7 +104,7 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: green;
+  background-color: #85BE8C;
   height: 100vh;
   width: 50%;
 }
@@ -125,6 +126,10 @@ button {
   width: 40px;
   height: 40px;
   background-size: cover;
+}
+
+.borde-campo {
+  background-image: url("../src/components/imgs/image 3.png");
 }
 </style>
 
