@@ -6,6 +6,8 @@
       </div>
       <div>
         <Button label="Primary" @click="agregarTarea">Crear tarea</Button>
+        <Button label="Secondary" @click="borrarUltimaTarea">Borrar tarea</Button>
+
       </div>
       <div class="avatar-container">
         <img src="../src/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
@@ -50,6 +52,18 @@ export default {
         this.checkNumTareas(); // Verificar el número de tareas después de agregar una nueva
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.'; // Establecer el mensaje de error si el límite se ha alcanzado
+      }
+    },
+
+    borrarUltimaTarea() {
+      if (this.tareas.length > 0) {
+        this.tareas.pop(); // Elimina la última tarea
+
+        // Encuentra la última parcela ocupada y márcala como vacía
+        const ultimaParcelaOcupada = this.parcelas.lastIndexOf(true);
+        if (ultimaParcelaOcupada !== -1) {
+          this.parcelas[ultimaParcelaOcupada] = false;
+        }
       }
     },
     estiloParcela(index) {
