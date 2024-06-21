@@ -24,10 +24,9 @@
       </div>
       <div class="numTareas">
         <p>Tus tareas: {{ tareas.length }}</p>
+        <p v-if="error" class="error-message">{{ error }}</p>
       </div>
     </div>
-
-
 
   </div>
 </template>
@@ -38,16 +37,22 @@ export default {
     return {
       tareas: [], // Aquí se almacenarán las tareas
       parcelas: Array(20).fill(false), // Array para controlar el estado de las parcelas (false: vacía, true: ocupada)
+      error: '' // Variable para almacenar el mensaje de error
     };
   },
   methods: {
     agregarTarea() {
-      this.tareas.push({}); // Añade una nueva tarea (vacía por ahora)
-
-      // Encuentra la primera parcela vacía y márcala como ocupada
-      const primeraParcelaVacia = this.parcelas.findIndex(parcela => !parcela);
-      if (primeraParcelaVacia !== -1) {
-        this.parcelas[primeraParcelaVacia] = true;
+      if (this.tareas.length < 20) {
+        this.tareas.push({}); // Añade una nueva tarea (vacía por ahora)
+        
+        // Encuentra la primera parcela vacía y márcala como ocupada
+        const primeraParcelaVacia = this.parcelas.findIndex(parcela => !parcela);
+        if (primeraParcelaVacia !== -1) {
+          this.parcelas[primeraParcelaVacia] = true;
+        }
+        this.checkNumTareas(); // Verificar el número de tareas después de agregar una nueva
+      } else {
+        this.error = 'No puedes crear más tareas. El máximo es 20.'; // Establecer el mensaje de error si el límite se ha alcanzado
       }
     },
     estiloParcela(index) {
@@ -57,11 +62,23 @@ export default {
         backgroundImage: `url(${imagenParcela})`,
       };
     },
+    checkNumTareas() {
+      if (this.tareas.length > 20) {
+        this.error = 'No puedes crear más tareas. El máximo es 20.'; // Establecer el mensaje de error
+      } else {
+        this.error = ''; // Limpiar el mensaje de error si el número de tareas es menor o igual a 20
+      }
+    }
   },
 };
 </script>
 
 <style>
+
+.error-message {
+  color: red;
+  font-weight: bold;
+}
 .container {
   display: flex;
   flex-direction: row;
