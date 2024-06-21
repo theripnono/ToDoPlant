@@ -3,31 +3,28 @@
     <div class="tareas">
       <div>
         <h2>To Do list</h2>
-
       </div>
       <div>
         <Button label="Primary" @click="agregarTarea">Crear tarea</Button>
-
       </div>
       <div class="avatar-container">
         <img src="../src/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
-
     </div>
 
     <div class="background-campo">
-      <div class="borde-campo">
-      </div>
+      <div class="borde-campo"></div>
       <div class="campo">
-        <div v-for="(parcela, index) in parcelas" :key="index" class="parcela" :style="estiloParcela(index)">
-        </div>
+        <div v-for="(parcela, index) in parcelas" :key="index" class="parcela" :style="estiloParcela(index)"></div>
       </div>
       <div class="numTareas">
         <p>Tus tareas: {{ tareas.length }}</p>
-        <p v-if="error" class="error-message">{{ error }}</p>
+        <div v-if="error" class="error-container">
+          <p class="error-message">{{ error }}</p>
+          <button @click="limpiarError" class="ok-button">OK</button>
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -68,16 +65,37 @@ export default {
       } else {
         this.error = ''; // Limpiar el mensaje de error si el número de tareas es menor o igual a 20
       }
+    },
+    limpiarError() {
+      this.error = ''; // Limpiar el mensaje de error cuando se presiona el botón OK
     }
   },
 };
 </script>
 
 <style>
-
 .error-message {
   color: red;
   font-weight: bold;
+}
+.ok-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.ok-button:hover {
+  background-color: #d32f2f;
+}
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .container {
   display: flex;
@@ -86,24 +104,20 @@ export default {
   justify-content: center;
   height: 100vh;
 }
-
 .tareas {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 50%;
 }
-
 .tareas h2 {
   margin-left: 50px;
   margin-top: 50px;
 }
-
 .tareas h2,
 button {
   margin-left: 50px;
 }
-
 .avatar-container {
   display: flex;
   align-items: flex-end;
@@ -111,11 +125,9 @@ button {
   margin-bottom: 30px;
   margin-left: 50px;
 }
-
 .avatar {
   width: 50px;
 }
-
 .background-campo {
   display: flex;
   flex-direction: column;
@@ -125,53 +137,22 @@ button {
   height: 100vh;
   width: 50%;
 }
-
 .numTareas p {
   display: flex;
-
   color: white;
 }
-
 .campo {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 5px;
   width: 200px;
 }
-
 .parcela {
   width: 40px;
   height: 40px;
   background-size: cover;
 }
-
 .borde-campo {
   background-image: url("../src/components/imgs/image 3.png");
 }
 </style>
-
-/*
-Explicación:
-Data:
-tareas: Un array vacío para almacenar las tareas.
-parcelas: Un array de 20 elementos, todos inicializados a false, que representan las 20 parcelas. false indica que una
-parcela está vacía.
-Methods:
-agregarTarea():
-Añade un objeto vacío al array tareas para representar la nueva tarea.
-Usa findIndex para encontrar el índice de la primera parcela con valor false (vacía).
-Si se encuentra una parcela vacía, se cambia su valor a true en el array parcelas.
-estiloParcela(index):
-Recibe el índice de la parcela como argumento.
-Construye la URL de la imagen a usar según el valor en parcelas[index].
-Devuelve un objeto de estilo con backgroundImage establecido a la URL de la imagen correcta.
-Template:
-Se utiliza un v-for para iterar sobre el array parcelas.
-Se crea un div con la clase "parcela" para cada elemento del array.
-Se usa :style="estiloParcela(index)" para aplicar el estilo correcto a cada parcela según su estado.
-Para usar este componente:
-Asegúrate de tener imágenes llamadas parcela-vacia.png y parcela-germinada.png en la ubicación correcta en tu proyecto.
-Importa y registra el componente en tu archivo principal de Vue.
-Usa el componente en tu template: <mi-componente-parcelas />
-Al hacer clic en el botón "Crear tarea", se añadirá una tarea y la primera parcela vacía cambiará su imagen.
-*/
