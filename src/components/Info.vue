@@ -2,8 +2,8 @@ import Button from 'primevue/button';
 <template>
     <div class="container">
         <h1 class="title">Cada vez que añadas una tarea, una planta empezará a crecer.</h1>
-        <img src="../src/components/imgs/image 1.png" alt="">
-        <Button label="Submit" class="start-button" @click="onStartClick">Empezar</Button>
+        <img src="@/components/imgs/image 1.png" alt="">
+        <RouterLink to="/main" class="start-button">Empezar</RouterLink>
     </div>
 </template>
 
@@ -23,6 +23,20 @@ export default {
 </script>
 
 <style scoped>
+.start-button {
+    background-color: #cda582;
+    color: white;
+    font-size: 24px;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: #f1e0d1;
+    color: #cda582;
+}
 .container {
     display: flex;
     flex-direction: column;
