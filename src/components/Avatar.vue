@@ -4,23 +4,24 @@ import Button from 'primevue/button';
         <h1 class="title">1 de 3: Selecciona tu avatar</h1>
         <div class="listaAvatares">
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[0] }"
-                @click=" seleccionarAvatar(avatarList[0])"><img src="../src/components/avatars/Avatar1.png"
+                @click=" seleccionarAvatar(avatarList[0])"><img src="@/components/avatars/Avatar1.png"
                     alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }"
-                @click="seleccionarAvatar(avatarList[1])"><img src="../src/components/avatars/Avatar2.png"
+                @click="seleccionarAvatar(avatarList[1])"><img src="@/components/avatars/Avatar2.png"
                     alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }"
-                @click="seleccionarAvatar(avatarList[2])"><img src="../src/components/avatars/Avatar3.png"
+                @click="seleccionarAvatar(avatarList[2])"><img src="@/components/avatars/Avatar3.png"
                     alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }"
-                @click="seleccionarAvatar(avatarList[3])"><img src="../src/components/avatars/Avatar4.png"
+                @click="seleccionarAvatar(avatarList[3])"><img src="@/components/avatars/Avatar4.png"
                     alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }"
-                @click="seleccionarAvatar(avatarList[4])"><img src="../src/components/avatars/Avatar5.png"
+                @click="seleccionarAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png"
                     alt=""></button>
         </div>
 
-        <Button label="Submit" class="start-button" @click="onStartClick">Siguiente</Button>
+        <RouterLink to="/info" class="start-button">Siguiente</RouterLink>
+        
     </div>
 </template>
 
@@ -51,6 +52,20 @@ export default {
 </script>
 
 <style scoped>
+.start-button {
+    background-color: #cda582;
+    color: white;
+    font-size: 24px;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: #f1e0d1;
+    color: #cda582;
+}
 .container {
     display: flex;
     flex-direction: column;

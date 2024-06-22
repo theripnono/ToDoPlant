@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <h1 class="title">¡Bienvenido a tu listado de tareas!</h1>
-        <button class="start-button" @click="onStartClick">Empezar</button>
+        
+        <RouterLink to="/avatar" class="start-button">Empezar</RouterLink>
     </div>
 </template>
 
@@ -17,6 +18,7 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
     display: flex;
     flex-direction: column;
