@@ -28,6 +28,7 @@ export default {
     color: white;
     font-size: 24px;
     padding: 1rem 2rem;
+    text-decoration: none; /* Esto oculta la subrayado */
     border: none;
     border-radius: 20px;
     cursor: pointer;

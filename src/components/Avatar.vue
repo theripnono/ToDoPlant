@@ -56,6 +56,7 @@ export default {
     background-color: #cda582;
     color: white;
     font-size: 24px;
+    text-decoration: none; /* Esto oculta la subrayado */
     padding: 1rem 2rem;
     border: none;
     border-radius: 20px;
