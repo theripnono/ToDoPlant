@@ -12,6 +12,24 @@
         <div class="avatar-container">
           <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
         </div>
+
+        <!--IMAGENES-->
+        <div class="granja-container">
+          <img src="@/components/imgs/farm/gallinero.png" alt="Icono granja" class="granja">
+        </div>
+
+        <div class="tronko-container">
+          <img src="@/components/imgs/farm/tronko.png" alt="arbol fruta" class="tronko">
+        </div>
+
+        <div class="grass-container">
+          <img src="@/components/imgs/farm/grass.png" alt="grass" class="grass">
+        </div>
+
+        <div class="arbol-container">
+          <img src="@/components/imgs/farm/arbol_fruta.png" alt="arbol" class="arbol">
+        </div>
+
       </div>
   
       <div class="background-campo">
@@ -172,7 +190,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #85BE8C;
+    background-color: #C0D470;
     height: 100vh;
     width: 50%;
   }
@@ -194,5 +212,47 @@
   .borde-campo {
     background-image: url("../src/components/imgs/image 3.png");
   }
+  .granja-container {
+  position: absolute; /* Posiciona el contenedor de la granja de manera absoluta */
+  top: 70px; /* Ajusta la posición superior según sea necesario */
+  right: 250px; 
+  /* Ajusta la posición izquierda según sea necesario */
+  }
+  .granja {
+    width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+    height: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  }
+
+  .arbol-container {
+  position: absolute; /* Posiciona el contenedor de la granja de manera absoluta */
+  top: 50px; 
+  right: 100px; 
+
+  }
+  .arbol {
+    width: 150px;
+    height: 150px; 
+  }
+  .tronko-container {
+  position: absolute; /* Posiciona el contenedor de la granja de manera absoluta */
+  top: 500px; 
+  right: 100px; 
+
+  }
+  .tronko {
+    width: 100px;
+    height: 100px; 
+  }
+  .grass-container {
+  position: absolute; /* Posiciona el contenedor de la granja de manera absoluta */
+  top: 500px; 
+  right: 100px; 
+
+  }
+  .grass {
+    width: 150px;
+    height: 150px; 
+  }
+
   </style>
   
