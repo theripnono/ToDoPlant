@@ -9,30 +9,6 @@
 
       </div>
 
-      <!-- Card tareas -->
-      <Card style="width: 25rem; overflow: hidden">
-        <template #header>
-          <!-- <img alt="user header" src="/images/usercard.png" /> -->
-        </template>
-        <template #title>Nombre Tarea</template>
-        <template #subtitle>Categoria</template>
-        <template #content>
-          <p class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
-            numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
-            cupiditate neque
-            quas!
-          </p>
-        </template>
-        <template #footer>
-          <div class="flex gap-4 mt-1">
-            <Button label="¡Conseguida!" severity="secondary" outlined class="w-full" />
-            <Button label="Editar" class="w-full" />
-            <Button label="Borrar" @click="borrarUltimaTarea" class="w-full" />
-          </div>
-        </template>
-      </Card>
-
       <div class="avatar-container">
         <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
@@ -48,6 +24,21 @@
 
       <div class="arbol-container">
         <img src="@/components/imgs/farm/arbol_fruta.png" alt="arbol" class="arbol">
+      </div>
+
+      <!-- Modal para crear tarea -->
+      <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
+        @create-task="agregarTarea" />
+
+      <!-- Modal de confirmación para eliminar tarea -->
+      <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete" />
+
+
+      <!-- Lista de Tareas en tarjetas -->
+      <div class="tareas-lista">
+        <h3>Tareas Actuales:</h3>
+        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
+          @delete="borrarTarea(index)" />
       </div>
 
     </div>
@@ -67,104 +58,73 @@
     </div>
   </div>
 
-  <!-- Modal -->
-
-  <Dialog v-model:visible="visible" modal header="Crear Tarea" :style="{ width: '25rem' }">
-    <span class="text-surface-500 dark:text-surface-400 block mb-8">Selecciona la categoria de tu tarea:</span>
-    <Dropdown v-model="categoriaSeleccionada" :options="cities" optionLabel="name"
-      placeholder="Selecciona una categoria" class="w-full md:w-14rem" />
-    <div class="flex items-center gap-4 mb-4">
-      <label for="descripcion" class="font-semibold w-24">Describe tu tarea:</label>
-      <Textarea v-model="value" rows="5" cols="24" />
-    </div>
-    <div class="flex items-center gap-4 mb-8">
-    </div>
-    <div class="flex justify-end gap-2">
-      <Button type="button" label="Cancelar" severity="secondary" @click="visible = false"></Button>
-      <Button type="button" label="Crear" @click="visible = false, agregarTarea()"></Button>
-    </div>
-  </Dialog>
-
 </template>
 
 <script>
+import ConfirmationModal from './ConfirmationModal.vue';
+import TaskCard from './TaskCard.vue';
+import TaskCreationModal from './TaskCreationModal.vue';
+
+
 export default {
+  components: {
+    ConfirmationModal,
+    TaskCard,
+    TaskCreationModal
+  },
   data() {
     return {
-
-      tareas: [{
-        nombreTarea: 'tarea01',
-        categoriaTarea: 'cat01',
-        fecha: '21/06/2024',
-        // id 
-      },
-      {
-        nombreTarea: 'tarea02',
-        categoriaTarea: 'cat02',
-        fecha: '21/06/2024',
-      },
-      {
-        nombreTarea: 'tarea03',
-        categoriaTarea: 'cat03',
-        fecha: '21/06/2024',
-      },
-      {
-        nombreTarea: 'tarea03',
-        categoriaTarea: 'cat03',
-        fecha: '21/06/2024',
-      },
-      ], // Aquí se almacenarán las tareas
+      tareas: [],
       visible: false,
-      // parcelas: Array(20).fill(false), // Array para controlar el estado de las parcelas (false: vacía, true: ocupada)
-      error: '' // Variable para almacenar el mensaje de error
+      nuevaTarea: { nombreTarea: '', categoriaTarea: '', fecha: '' },
+      error: '',
+      categorias: [
+        { name: 'Personal', code: 'cat01' },
+        { name: 'Trabajo', code: 'cat02' },
+        { name: 'Hogar', code: 'cat03' },
+        { name: 'Estudio', code: 'cat04' },
+        { name: 'Otro', code: 'cat05' }
+      ],
+      confirmVisible: false,
+      deleteIndex: null,
     };
   },
   methods: {
-    agregarTarea() {
+    agregarTarea(task) {
       if (this.tareas.length < 20) {
-        this.tareas.push({}); // Añade una nueva tarea (vacía por ahora)
-
-        // Encuentra la primera parcela vacía y márcala como ocupada
-        const primeraParcelaVacia = this.parcelas.findIndex(parcela => !parcela);
-        if (primeraParcelaVacia !== -1) {
-          this.parcelas[primeraParcelaVacia] = true;
-        }
-
-        this.checkNumTareas(); // Verificar el número de tareas después de agregar una nueva
+        this.tareas.push(task);
+        this.visible = false;
       } else {
-        this.error = 'No puedes crear más tareas. El máximo es 20.'; // Establecer el mensaje de error si el límite se ha alcanzado
+        this.error = 'No puedes crear más tareas. El máximo es 20.';
       }
     },
-
-    borrarUltimaTarea() {
-      if (this.tareas.length > 0) {
-        this.tareas.pop(); // Elimina la última tarea
-
-        // Encuentra la última parcela ocupada y márcala como vacía
-        const ultimaParcelaOcupada = this.parcelas.lastIndexOf(true);
-        if (ultimaParcelaOcupada !== -1) {
-          this.parcelas[ultimaParcelaOcupada] = false;
-
-          // TODO eliminar la futura card
-        }
-      }
+    borrarTarea(index) {
+      this.deleteIndex = index;
+      this.confirmVisible = true;
+    },
+    confirmDelete() {
+      this.tareas.splice(this.deleteIndex, 1);
+      this.confirmVisible = false;
+      this.deleteIndex = null;
+    },
+    handleVisibilityChange(newValue) {
+      this.confirmVisible = newValue;
     },
     estiloParcela(index) {
-      // Devuelve el estilo de la parcela según si está ocupada o no
-      const imagenParcela = this.tareas.length > index ? '../src/components/imgs/germinada.png' : '../src/components/imgs/parcela.png'; // Ajusta las rutas de las imágenes
+      const imagenParcela = this.tareas.length > index ? '../src/components/imgs/germinada.png' : '../src/components/imgs/parcela.png';
       return {
         backgroundImage: `url(${imagenParcela})`,
       };
     },
     checkNumTareas() {
       if (this.tareas.length > 20) {
-        this.error = 'No puedes crear más tareas. El máximo es 20.'; // Establecer el mensaje de error
+        this.error = 'No puedes crear más tareas. El máximo es 20.';
       } else {
-        this.error = ''; // Limpiar el mensaje de error si el número de tareas es menor o igual a 20
+        this.error = '';
       }
     },
     limpiarError() {
-      this.error = ''; // Limpiar el mensaje de error cuando se presiona el botón OK
+      this.error = '';
     }
   },
 };
@@ -211,11 +171,6 @@ export default {
   flex-direction: column;
   height: 100vh;
   width: 50%;
-}
-
-.tareas h2 {
-  margin-left: 50px;
-  margin-top: 50px;
 }
 
 .tareas h2,
@@ -272,26 +227,19 @@ button {
 
 .granja-container {
   position: absolute;
-  /* Posiciona el contenedor de la granja de manera absoluta */
   top: 70px;
-  /* Ajusta la posición superior según sea necesario */
   right: 250px;
-  /* Ajusta la posición izquierda según sea necesario */
 }
 
 .granja {
   width: 100px;
-  /* Ajusta el tamaño de la imagen según sea necesario */
   height: 100px;
-  /* Ajusta el tamaño de la imagen según sea necesario */
 }
 
 .arbol-container {
   position: absolute;
-  /* Posiciona el contenedor de la granja de manera absoluta */
   top: 50px;
   right: 100px;
-
 }
 
 .arbol {
@@ -301,10 +249,8 @@ button {
 
 .tronko-container {
   position: absolute;
-  /* Posiciona el contenedor de la granja de manera absoluta */
   top: 500px;
   right: 100px;
-
 }
 
 .tronko {
@@ -312,16 +258,17 @@ button {
   height: 100px;
 }
 
-.grass-container {
-  position: absolute;
-  /* Posiciona el contenedor de la granja de manera absoluta */
-  top: 500px;
-  right: 100px;
-
+.card {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
 }
 
-.grass {
-  width: 150px;
-  height: 150px;
+.card-header {
+  font-weight: bold;
+}
+
+.card-body p {
+  margin: 5px 0;
 }
 </style>
