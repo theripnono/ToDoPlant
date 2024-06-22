@@ -5,10 +5,34 @@
         <h2>To Do list</h2>
       </div>
       <div>
-        <Button label="Primary" @click="agregarTarea">Crear tarea</Button>
-        <Button label="Secondary" @click="borrarUltimaTarea">Borrar tarea</Button>
+        <Button label="Primary" @click="visible = true">Crear tarea</Button>
 
       </div>
+
+      <!-- Card tareas -->
+      <Card style="width: 25rem; overflow: hidden">
+        <template #header>
+          <!-- <img alt="user header" src="/images/usercard.png" /> -->
+        </template>
+        <template #title>Nombre Tarea</template>
+        <template #subtitle>Categoria</template>
+        <template #content>
+          <p class="m-0">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+            numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse,
+            cupiditate neque
+            quas!
+          </p>
+        </template>
+        <template #footer>
+          <div class="flex gap-4 mt-1">
+            <Button label="¡Conseguida!" severity="secondary" outlined class="w-full" />
+            <Button label="Editar" class="w-full" />
+            <Button label="Borrar" @click="borrarUltimaTarea" class="w-full" />
+          </div>
+        </template>
+      </Card>
+
       <div class="avatar-container">
         <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
@@ -42,6 +66,25 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal -->
+
+  <Dialog v-model:visible="visible" modal header="Crear Tarea" :style="{ width: '25rem' }">
+    <span class="text-surface-500 dark:text-surface-400 block mb-8">Selecciona la categoria de tu tarea:</span>
+    <Dropdown v-model="categoriaSeleccionada" :options="cities" optionLabel="name"
+      placeholder="Selecciona una categoria" class="w-full md:w-14rem" />
+    <div class="flex items-center gap-4 mb-4">
+      <label for="descripcion" class="font-semibold w-24">Describe tu tarea:</label>
+      <Textarea v-model="value" rows="5" cols="24" />
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+    </div>
+    <div class="flex justify-end gap-2">
+      <Button type="button" label="Cancelar" severity="secondary" @click="visible = false"></Button>
+      <Button type="button" label="Crear" @click="visible = false, agregarTarea()"></Button>
+    </div>
+  </Dialog>
+
 </template>
 
 <script>
@@ -71,6 +114,7 @@ export default {
         fecha: '21/06/2024',
       },
       ], // Aquí se almacenarán las tareas
+      visible: false,
       // parcelas: Array(20).fill(false), // Array para controlar el estado de las parcelas (false: vacía, true: ocupada)
       error: '' // Variable para almacenar el mensaje de error
     };
