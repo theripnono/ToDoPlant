@@ -6,7 +6,13 @@
       </div>
       <div>
         <Button label="Primary" @click="visible = true">Crear tarea</Button>
+      </div>
 
+      <!-- Lista de Tareas en tarjetas -->
+      <div class="tareas-lista">
+        <h3>Tareas Actuales:</h3>
+        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
+          @delete="borrarTarea(index)" />
       </div>
 
       <div class="avatar-container">
@@ -32,15 +38,6 @@
 
       <!-- Modal de confirmación para eliminar tarea -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete" />
-
-
-      <!-- Lista de Tareas en tarjetas -->
-      <div class="tareas-lista">
-        <h3>Tareas Actuales:</h3>
-        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
-          @delete="borrarTarea(index)" />
-      </div>
-
     </div>
 
     <div class="background-campo">
@@ -57,7 +54,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
