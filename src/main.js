@@ -8,6 +8,9 @@ import Dialog from "primevue/dialog";
 import Dropdown from "primevue/dropdown";
 import Textarea from "primevue/textarea";
 import Card from "primevue/card";
+import InputText from "primevue/inputtext";
+import Calendar from "primevue/calendar";
+
 import { createMemoryHistory, createRouter } from "vue-router";
 
 import Landing from "./components/Landing.vue";
@@ -51,4 +54,6 @@ createApp(App)
   .component("Dropdown", Dropdown)
   .component("Textarea", Textarea)
   .component("Card", Card)
+  .component("InputText", InputText)
+  .component("Calendar", Calendar)
   .mount("#app");
