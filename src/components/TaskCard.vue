@@ -1,10 +1,10 @@
 <template>
     <Card :style="{ width: '25rem', overflow: 'hidden' }">
         <template #title>{{ tarea.nombreTarea }}</template>
-        <template #subtitle>{{ tarea.categoriaTarea }}</template>
+        <template #subtitle><span v-text="tarea.categoriaTarea.name"></span></template>
         <template #content>
             <p class="m-0">
-                Fecha de finalización: {{ tarea.fecha }}
+                Día de la tarea: {{ formatDate(tarea.fecha) }}
             </p>
         </template>
         <template #footer>
@@ -26,6 +26,9 @@ export default {
         }
     },
     methods: {
+        formatDate(date) {
+            return new Date(date).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        },
         emitDelete() {
             this.$emit('delete', this.tarea);
         }
