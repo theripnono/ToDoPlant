@@ -142,7 +142,11 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-
+.tareas-lista {
+    overflow-y: auto;
+    padding: 10px; /* Optional: for some padding */
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+}
 .container {
   display: flex;
   flex-direction: row;
@@ -207,42 +211,7 @@ button {
   background-size: cover;
 }
 
-.borde-campo {
-  background-image: url("../src/components/imgs/image 3.png");
-}
 
-.granja-container {
-  position: absolute;
-  top: 70px;
-  right: 250px;
-}
-
-.granja {
-  width: 100px;
-  height: 100px;
-}
-
-.arbol-container {
-  position: absolute;
-  top: 50px;
-  right: 100px;
-}
-
-.arbol {
-  width: 150px;
-  height: 150px;
-}
-
-.tronko-container {
-  position: absolute;
-  top: 500px;
-  right: 100px;
-}
-
-.tronko {
-  width: 100px;
-  height: 100px;
-}
 
 .card {
   border: 1px solid #ccc;
