@@ -19,18 +19,7 @@
         <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
 
-      <!--IMAGENES-->
-      <div class="granja-container">
-        <img src="@/components/imgs/farm/gallinero.png" alt="Icono granja" class="granja">
-      </div>
-
-      <div class="tronko-container">
-        <img src="@/components/imgs/farm/tronko.png" alt="arbol fruta" class="tronko">
-      </div>
-
-      <div class="arbol-container">
-        <img src="@/components/imgs/farm/arbol_fruta.png" alt="arbol" class="arbol">
-      </div>
+     
 
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
@@ -192,11 +181,12 @@ button {
   justify-content: center;
   align-items: center;
   background-color: #C0D470;
-  background-image: url("@/components/imgs/farm/grass.png");
-  background-size: 100px;
+  background-image: url("@/components/imgs/farm/farm_land.png");
+  background-size: contain;   
   background-repeat: repeat;
   height: 100vh;
   width: 50%;
+  
 }
 
 .numTareas p {
