@@ -19,18 +19,7 @@
         <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
 
-      <!--IMAGENES-->
-      <div class="granja-container">
-        <img src="@/components/imgs/farm/gallinero.png" alt="Icono granja" class="granja">
-      </div>
-
-      <div class="tronko-container">
-        <img src="@/components/imgs/farm/tronko.png" alt="arbol fruta" class="tronko">
-      </div>
-
-      <div class="arbol-container">
-        <img src="@/components/imgs/farm/arbol_fruta.png" alt="arbol" class="arbol">
-      </div>
+     
 
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
@@ -153,7 +142,11 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-
+.tareas-lista {
+    overflow-y: auto;
+    padding: 10px; /* Optional: for some padding */
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+}
 .container {
   display: flex;
   flex-direction: row;
@@ -192,11 +185,12 @@ button {
   justify-content: center;
   align-items: center;
   background-color: #C0D470;
-  background-image: url("@/components/imgs/farm/grass.png");
-  background-size: 100px;
+  background-image: url("@/components/imgs/farm/farm_land.png");
+  background-size: contain;   
   background-repeat: repeat;
   height: 100vh;
   width: 50%;
+  
 }
 
 .numTareas p {
@@ -217,42 +211,7 @@ button {
   background-size: cover;
 }
 
-.borde-campo {
-  background-image: url("../src/components/imgs/image 3.png");
-}
 
-.granja-container {
-  position: absolute;
-  top: 70px;
-  right: 250px;
-}
-
-.granja {
-  width: 100px;
-  height: 100px;
-}
-
-.arbol-container {
-  position: absolute;
-  top: 50px;
-  right: 100px;
-}
-
-.arbol {
-  width: 150px;
-  height: 150px;
-}
-
-.tronko-container {
-  position: absolute;
-  top: 500px;
-  right: 100px;
-}
-
-.tronko {
-  width: 100px;
-  height: 100px;
-}
 
 .card {
   border: 1px solid #ccc;
