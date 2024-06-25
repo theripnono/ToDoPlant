@@ -6,7 +6,10 @@
       </div>
       <div>
         <Button label="Primary" @click="visible = true">Crear tarea</Button>
+        
       </div>
+      <font-awesome-icon :icon="['fas', 'edit']" />
+      <font-awesome-icon :icon="['fas', 'trash']" />
 
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
