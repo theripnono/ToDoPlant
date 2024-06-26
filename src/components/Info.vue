@@ -1,14 +1,27 @@
 import Button from 'primevue/button';
 <template>
-    <div class="container">
-        <h1 class="title">Cada vez que añadas una tarea, una planta empezará a crecer.</h1>
-        <img src="@/components/imgs/image 1.png" alt="">
-        <RouterLink to="/main" class="start-button">Empezar</RouterLink>
+    <div>
+        <Splitter style="height: 100vh" class="mb-8">
+            <SplitterPanel class="flex items-center justify-center">
+          
+                <h2 class="title">Cada vez que crees una tarea, una planta empezará a crecer.</h2>
+                <div>
+                    <img src="@/components/imgs/germinada.png" alt="semilla">
+                </div>           
+            </SplitterPanel>
+            <SplitterPanel class="flex items-center justify-center"> 
+                <h2 class="title">Cuando la completes... ¡Coséchala!</h2> 
+                <RouterLink to="/main" class="start-button">Empezar</RouterLink>
+            </SplitterPanel>
+        </Splitter>
     </div>
+    
 </template>
 
 <script>
+
 export default {
+
     data() {
         return {
             name: 'info',

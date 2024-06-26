@@ -15,6 +15,8 @@ import Textarea from "primevue/textarea";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
+import Splitter from 'primevue/splitter';
+import SplitterPanel from 'primevue/splitterpanel';
 
 import { createMemoryHistory, createRouter } from "vue-router";
 
@@ -63,5 +65,7 @@ createApp(App)
   .component("Card", Card)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
+  .component("Splitter",Splitter)
+  .component("SplitterPanel",SplitterPanel)
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount("#app");
