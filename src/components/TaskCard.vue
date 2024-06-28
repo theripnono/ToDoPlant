@@ -8,10 +8,10 @@
             </p>
         </template>
         <template #footer>
-            <div class="flex gap-4 mt-1">
-                <Button label="¡Conseguida!" severity="secondary" outlined class="w-full" />
-                <Button label="Editar" class="w-full" />
-                <Button label="Borrar" @click="emitDelete" class="w-full" />
+            <div class="flex gap-4 mt-1 justify-between">
+                <Button label="¡Conseguida!" severity="secondary" outlined class="w-full"></Button>
+                <Button label="Editar" class="w-full"><font-awesome-icon :icon="['fas', 'edit']"/></Button>
+                <Button label="Borrar" @click="emitDelete" class="w-full" ><font-awesome-icon :icon="['fas', 'trash']" /></Button>
             </div>
         </template>
     </Card>
