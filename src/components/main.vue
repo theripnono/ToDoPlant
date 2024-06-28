@@ -6,10 +6,7 @@
       </div>
       <div>
         <Button label="Primary" @click="visible = true">Crear tarea</Button>
-        
-      </div>
-      <font-awesome-icon :icon="['fas', 'edit']" />
-      <font-awesome-icon :icon="['fas', 'trash']" />
+      </div>  
 
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
@@ -38,7 +35,7 @@
         <div v-for="(parcela, index) in Array(20)" :key="index" class="parcela" :style="estiloParcela(index)"></div>
       </div>
       <div class="numTareas">
-        <p>Tus tareas: {{ tareas.length }}</p>
+        <!-- <p>Tus tareas: {{ tareas.length }}</p> -->
         <div v-if="error" class="error-container">
           <p class="error-message">{{ error }}</p>
           <button @click="limpiarError" class="ok-button">OK</button>
@@ -123,7 +120,11 @@ export default {
   color: red;
   font-weight: bold;
 }
-
+.custom-icon {
+    color: #f59e0b;         /* Change the color */
+    font-size: 24px;    /* Change the size */
+    margin-left: 10px;  /* Add some margin */
+}
 .ok-button {
   background-color: #f44336;
   color: white;
@@ -189,11 +190,10 @@ button {
   align-items: center;
   background-color: #C0D470;
   background-image: url("@/components/imgs/farm/farm_land.png");
-  background-size: contain;   
+  background-size: cover; 
   background-repeat: repeat;
   height: 100vh;
   width: 50%;
-  
 }
 
 .numTareas p {
