@@ -75,6 +75,7 @@ export default {
 .listaAvatares {
     display: flex;
     gap: 15px;
+    border-radius: 7px;
 }
 
 .title {
@@ -92,5 +93,6 @@ export default {
 
 .seleccionado {
     border: 4px solid orange;
+    border-radius: 7px;
 }
 </style>

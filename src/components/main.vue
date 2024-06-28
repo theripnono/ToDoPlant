@@ -59,7 +59,11 @@ export default {
   },
   data() {
     return {
-      tareas: [],
+      tareas: [{
+        nombreTarea:'Personal',
+        categoriaTarea:'asdt',
+        fecha:'28/06/2025'
+      }],
       visible: false,
       nuevaTarea: { nombreTarea: '', categoriaTarea: '', fecha: '' },
       error: '',
@@ -212,6 +216,7 @@ button {
   width: 40px;
   height: 40px;
   background-size: cover;
+  border-radius: 5px;
 }
 
 
