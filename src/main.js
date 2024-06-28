@@ -3,7 +3,7 @@ import "primevue/resources/themes/aura-light-amber/theme.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
 
 
 import { createApp } from "vue";
@@ -53,7 +53,7 @@ const router = createRouter({
 });
 
 // Añadir los elementos de PrimeVue aqui enlanzandolos con un  '.'
-library.add(faTrash, faEdit);
+library.add(faHandHoldingHeart, faTrash, faEdit);
 
 createApp(App)
   .use(PrimeVue)
@@ -65,7 +65,7 @@ createApp(App)
   .component("Card", Card)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
-  .component("Splitter",Splitter)
-  .component("SplitterPanel",SplitterPanel)
+  .component("Splitter", Splitter)
+  .component("SplitterPanel", SplitterPanel)
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount("#app");
