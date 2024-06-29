@@ -4,31 +4,43 @@
         
         <div class="listaAvatares">
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[0] }"
-                @click="seleccionarAvatar(avatarList[0])"><img src="@/components/avatars/Avatar1.png" alt=""></button>
+                @click="selectedAvatarStore.setAvatar(avatarList[0])"><img src="@/components/avatars/Avatar1.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }"
-                @click="seleccionarAvatar(avatarList[1])"><img src="@/components/avatars/Avatar2.png" alt=""></button>
+                @click="selectedAvatarStore.setAvatar(avatarList[1])"><img src="@/components/avatars/Avatar2.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }"
-                @click="seleccionarAvatar(avatarList[2])"><img src="@/components/avatars/Avatar3.png" alt=""></button>
+                @click="selectedAvatarStore.setAvatar(avatarList[2])"><img src="@/components/avatars/Avatar3.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }"
-                @click="seleccionarAvatar(avatarList[3])"><img src="@/components/avatars/Avatar4.png" alt=""></button>
+                @click="selectedAvatarStore.setAvatar(avatarList[3])"><img src="@/components/avatars/Avatar4.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }"
-                @click="seleccionarAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
+                @click="selectedAvatarStore.setAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
         </div>
 
-        
-
         <RouterLink v-if="avatarSeleccionado" to="/info" class="start-button">Siguiente</RouterLink>
-        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+    
+        
+        <!-- <img :src="selectedAvatarStore.avatar"> -->
+        <div class="avatarMove">
+            <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" class="avatar">
+        </div>
+
     </div>
+
 </template>
 
 <script>
+import {useSelectedAvatarStore} from "@/stores/selectedAvatar"
+
 export default {
+    setup(){
+        const selectedAvatarStore = useSelectedAvatarStore()
+        return {selectedAvatarStore}
+    },
     data() {
         return {
-            avatarList: ["avatar1", "avatar2", "avatar3", "avatar4", "avatar5"],
+            avatarList: ["Avatar1", "Avatar2", "Avatar3", "Avatar4", "Avatar5"],
             avatarSeleccionado: "",
-            errorMessage: ""
+            errorMessage: "",
+       
         }
     },
     methods: {
@@ -36,13 +48,7 @@ export default {
             this.avatarSeleccionado = avatar;
             this.errorMessage = ""; // Clear error message when an avatar is selected
         },
-        handleNextClick() {
-            if (!this.avatarSeleccionado) {
-                this.errorMessage = "Con lo monos que son... no entiendo como no escoges uno";
-            } else {
-                this.$router.push('/info');
-            }
-        }
+       
     }
 }
 </script>
@@ -94,5 +100,38 @@ export default {
 .seleccionado {
     border: 4px solid orange;
     border-radius: 7px;
+}
+
+.avatar{
+    position: relative;
+    height: 5rem;
+    width: 4rem;
+}
+
+
+.avatarMove{
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    animation: animation 1s ease-in-out infinite;
+}
+@keyframes animation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-50%);
+        
+    }
+    90% {
+        transform: translateY(0);
+        
+    }
 }
 </style>
