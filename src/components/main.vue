@@ -15,15 +15,13 @@
           @delete="borrarTarea(index)" />
       </div>
 
-      <div class="avatar-container">
-        <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
-      </div>
-
-     
+      <div class="avatarMove">
+            <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" class="avatar">
+        </div>
 
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
-        @create-task="agregarTarea" />
+        @create-task="agregarTarea"/>
 
       <!-- Modal de confirmación para eliminar tarea -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete" />
@@ -49,9 +47,18 @@
 import ConfirmationModal from './ConfirmationModal.vue';
 import TaskCard from './TaskCard.vue';
 import TaskCreationModal from './TaskCreationModal.vue';
+import {useSelectedAvatarStore} from "@/stores/selectedAvatar";
+
+
+const username = "aleh";
+const API_URL = `https://node-todos.vercel.app/users/${username}`;
 
 
 export default {
+  setup(){
+        const selectedAvatarStore = useSelectedAvatarStore()
+        return {selectedAvatarStore}
+    },
   components: {
     ConfirmationModal,
     TaskCard,
@@ -59,11 +66,23 @@ export default {
   },
   data() {
     return {
-      tareas: [{
-        nombreTarea:'Personal',
-        categoriaTarea:'asdt',
-        fecha:'28/06/2025'
-      }],
+      
+      //Petiones GET para obtener info de la API
+      //https://node-todos.vercel.app/api-docs/#/todos
+
+      tareas: [
+        {
+          nombreTarea:'Personal',
+          categoriaTarea:'asdt',
+          fecha:'28/06/2025'
+        },
+        {
+          nombreTarea:'Personal',
+          categoriaTarea:'asdt',
+          fecha:'28/06/2025'
+        },
+      ],
+
       visible: false,
       nuevaTarea: { nombreTarea: '', categoriaTarea: '', fecha: '' },
       error: '',
@@ -79,9 +98,29 @@ export default {
     };
   },
   methods: {
-    agregarTarea(task) {
+
+    setup(){
+      const constacsStore=useconcastStore();
+      return{
+        constacsStore
+      }
+    },
+    agregarTarea(event) {
       if (this.tareas.length < 20) {
-        this.tareas.push(task);
+        
+        // debugger
+        // event.preventDefault();
+        fetch(`${API_URL}/todos`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.friends = data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+        this.tareas.push(event);
         this.visible = false;
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
@@ -114,7 +153,19 @@ export default {
     },
     limpiarError() {
       this.error = '';
+    },
+
+
+    //TODO REPASAR ESTA FUNCION meterla cuando se 
+    //da lick al boton plantar del componente Info.vue
+    //COOKIES para saltarte toda la morralla:
+    beforeCreate(){
+    const aboUsVisitedCookie= document.cookie.includes("about-us-visited=True");
+    consolele.log(aboUsVisitedCookie);
+    if(!aboUsVisitedCookie){
+      this.$router.push("/main");
     }
+  }
   },
 };
 </script>
@@ -234,4 +285,12 @@ button {
 .card-body p {
   margin: 5px 0;
 }
+
+.avatar{
+    position: relative;
+    height: 5rem;
+    width: 4rem;
+    top:150%
+}
+
 </style>

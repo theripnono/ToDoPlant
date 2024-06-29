@@ -4,19 +4,19 @@
         
         <div class="listaAvatares">
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[0] }"
-                @click="selectedAvatarStore.setAvatar(avatarList[0])"><img src="@/components/avatars/Avatar1.png" alt=""></button>
+                @click="seleccionarAvatar(avatarList[0])"><img src="/imgs/avatars/Avatar1.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }"
-                @click="selectedAvatarStore.setAvatar(avatarList[1])"><img src="@/components/avatars/Avatar2.png" alt=""></button>
+                @click="seleccionarAvatar(avatarList[1])"><img src="/imgs/avatars/Avatar2.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }"
-                @click="selectedAvatarStore.setAvatar(avatarList[2])"><img src="@/components/avatars/Avatar3.png" alt=""></button>
+                @click="seleccionarAvatar(avatarList[2])"><img src="/imgs/avatars/Avatar3.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }"
-                @click="selectedAvatarStore.setAvatar(avatarList[3])"><img src="@/components/avatars/Avatar4.png" alt=""></button>
+                @click="seleccionarAvatar(avatarList[3])"><img src="/imgs/avatars/Avatar4.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }"
-                @click="selectedAvatarStore.setAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
+                @click="seleccionarAvatar(avatarList[4])"><img src="/imgs/avatars/Avatar5.png" alt=""></button>
         </div>
 
         <RouterLink v-if="avatarSeleccionado" to="/info" class="start-button">Siguiente</RouterLink>
-    
+        
         
         <!-- <img :src="selectedAvatarStore.avatar"> -->
         <div class="avatarMove">
@@ -46,7 +46,8 @@ export default {
     methods: {
         seleccionarAvatar(avatar) {
             this.avatarSeleccionado = avatar;
-            this.errorMessage = ""; // Clear error message when an avatar is selected
+            this.errorMessage = ""; // Clear error essage when an avatar is selected
+            this.selectedAvatarStore.setAvatar(avatar)
         },
        
     }

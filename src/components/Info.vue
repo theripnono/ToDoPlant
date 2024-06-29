@@ -34,12 +34,18 @@
         </template>
     </Card>
         <div class="avatar-container polloMove">
-            <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
+            <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" alt="Icono avatar" class="avatar">
         </div>
 </div>
 </template>
 <script>
+import {useSelectedAvatarStore} from "@/stores/selectedAvatar"
+
 export default {
+    setup(){
+        const selectedAvatarStore = useSelectedAvatarStore()
+        return {selectedAvatarStore}
+    },
     data() {
         return {
             name: 'info',
@@ -55,7 +61,7 @@ export default {
 <style scoped>
 
 .start-button {
-    background-color: #cda582;
+    background-color: #ac825d;
     color: white;
     font-size: 24px;
     padding: 1rem 2rem;
