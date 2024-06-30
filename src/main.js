@@ -16,6 +16,7 @@ import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
 
+import ProgressSpinner from 'primevue/progressspinner';
 
 
 import { createMemoryHistory, createRouter } from "vue-router";
@@ -68,5 +69,6 @@ createApp(App)
   .component("Card", Card)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
+  .component("ProgressSpinner", ProgressSpinner)
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount("#app");

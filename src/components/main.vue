@@ -11,6 +11,9 @@
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
         <h3>Tareas Actuales:</h3>
+        <ProgressSpinner v-if = "this.loading" style="width: 50px; height: 50px" strokeWidth="8" fill="transparent"
+        animationDuration=".5s" aria-label="Custom ProgressSpinner" />
+
         <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
           @delete="borrarTarea(index)" />
       </div>
@@ -30,7 +33,10 @@
     <div class="background-campo">
       <div class="borde-campo"></div>
       <div class="campo">
-        <div v-for="(parcela, index) in Array(20)" :key="index" class="parcela" :style="estiloParcela(index)"></div>
+        <div @click=" () => console.log(index)" v-for="(parcela, index) in Array(20)"s :key="index" class="parcela" :style="estiloParcela(index)"></div>
+       
+        <!-- IDEA TOOLTIP -->
+        <!-- :data-parcela="index" para acceder a las parcelas. la ruta PointerEvent.target.dataset -->
       </div>
       <div class="numTareas">
         <!-- <p>Tus tareas: {{ tareas.length }}</p> -->
@@ -53,6 +59,9 @@ import {useSelectedAvatarStore} from "@/stores/selectedAvatar";
 const username = "aleh";
 const API_URL = `https://node-todos.vercel.app/users/${username}`;
 
+//get method:https://node-todos.vercel.app/users/aleh/todos
+//post method:https://node-todos.vercel.app/users/aleh/todos
+// https://date-fns.org/ para descargar fechas
 
 export default {
   setup(){
@@ -69,22 +78,13 @@ export default {
       
       //Petiones GET para obtener info de la API
       //https://node-todos.vercel.app/api-docs/#/todos
+      loading : false,
 
       tareas: [
-        {
-          nombreTarea:'Personal',
-          categoriaTarea:'asdt',
-          fecha:'28/06/2025'
-        },
-        {
-          nombreTarea:'Personal',
-          categoriaTarea:'asdt',
-          fecha:'28/06/2025'
-        },
+
       ],
 
       visible: false,
-      nuevaTarea: { nombreTarea: '', categoriaTarea: '', fecha: '' },
       error: '',
       categorias: [
         { name: 'Personal', code: 'cat01' },
@@ -105,27 +105,51 @@ export default {
         constacsStore
       }
     },
-    agregarTarea(event) {
+
+    async obtenerTareas(){
+      this.loading = true
+      const promesaFetch = fetch(`https://node-todos.vercel.app/users/pollo/todos`)
+      const response = await promesaFetch;
+      const promesaJson = response.json()
+      const tasks = await promesaJson
+      
+      this.loading = false
+      this.tareas = tasks
+    },
+
+
+    agregarTarea(task) {
       if (this.tareas.length < 20) {
-        
-        // debugger
+
         // event.preventDefault();
-        fetch(`${API_URL}/todos`)
+        // fetch(`${API_URL}/todos`)
+        fetch(`https://node-todos.vercel.app/users/pollo/todos`,{
+          method:'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            
+            text:task.nombreTarea,
+            description:task.categoriaTarea.name,
+          }),
+        })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          this.friends = data;
+          this.tareas.push(data);
+
         })
         .catch((error) => {
           console.log(error);
         });
 
-        this.tareas.push(event);
         this.visible = false;
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
       }
     },
+    
     borrarTarea(index) {
       this.deleteIndex = index;
       this.confirmVisible = true;
@@ -139,7 +163,7 @@ export default {
       this.confirmVisible = newValue;
     },
     estiloParcela(index) {
-      const imagenParcela = this.tareas.length > index ? '../src/components/imgs/germinada.png' : '../src/components/imgs/parcela.png';
+      const imagenParcela = this.tareas.length > index ? '/imgs/germinada.png' : '/imgs/parcela.png';
       return {
         backgroundImage: `url(${imagenParcela})`,
       };
@@ -156,17 +180,21 @@ export default {
     },
 
 
-    //TODO REPASAR ESTA FUNCION meterla cuando se 
+    
+  },
+      //TODO REPASAR ESTA FUNCION meterla cuando se 
     //da lick al boton plantar del componente Info.vue
     //COOKIES para saltarte toda la morralla:
-    beforeCreate(){
-    const aboUsVisitedCookie= document.cookie.includes("about-us-visited=True");
-    consolele.log(aboUsVisitedCookie);
-    if(!aboUsVisitedCookie){
-      this.$router.push("/main");
-    }
+  // beforeCreate(){
+  //   const aboUsVisitedCookie= document.cookie.includes("about-us-visited=True");
+  //   consolele.log(aboUsVisitedCookie);
+  //   if(!aboUsVisitedCookie){
+  //     this.$router.push("/main");
+  //   }
+  // },
+  created(){
+    this.obtenerTareas()
   }
-  },
 };
 </script>
 

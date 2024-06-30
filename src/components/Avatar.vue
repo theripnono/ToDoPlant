@@ -3,15 +3,15 @@
         <h1 class="title">Selecciona un Avatar:</h1>
         
         <div class="listaAvatares">
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[0] }"
+            <button :class="{ seleccionado: avatarSeleccionado === avatarList[0]}" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[0])"><img src="/imgs/avatars/Avatar1.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }"
+            <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[1])"><img src="/imgs/avatars/Avatar2.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }"
+            <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[2])"><img src="/imgs/avatars/Avatar3.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }"
+            <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[3])"><img src="/imgs/avatars/Avatar4.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }"
+            <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[4])"><img src="/imgs/avatars/Avatar5.png" alt=""></button>
         </div>
 
