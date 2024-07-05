@@ -1,6 +1,6 @@
 import "./assets/main.css";
 import "primevue/resources/themes/aura-light-amber/theme.css";
-import { createPinia } from "pinia"
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faTrash, faEdit, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
@@ -15,9 +15,8 @@ import Textarea from "primevue/textarea";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
-
-import ProgressSpinner from 'primevue/progressspinner';
-
+import Splitter from 'primevue/splitter';
+import SplitterPanel from 'primevue/splitterpanel';
 
 import { createMemoryHistory, createRouter } from "vue-router";
 
@@ -27,8 +26,6 @@ import main from "./components/main.vue";
 import Avatar from "./components/Avatar.vue";
 
 import App from "./App.vue";
-
-const pinia = createPinia()
 
 // Crear las rutas
 const routes = [
@@ -61,7 +58,6 @@ library.add(faHandHoldingHeart, faTrash, faEdit);
 createApp(App)
   .use(PrimeVue)
   .use(router)
-  .use(pinia)
   .component("Button", Button)
   .component("Dialog", Dialog)
   .component("Dropdown", Dropdown)
@@ -69,6 +65,7 @@ createApp(App)
   .component("Card", Card)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
-  .component("ProgressSpinner", ProgressSpinner)
+  .component("Splitter", Splitter)
+  .component("SplitterPanel", SplitterPanel)
   .component('font-awesome-icon', FontAwesomeIcon)
   .mount("#app");

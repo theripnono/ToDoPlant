@@ -3,12 +3,10 @@
         <div class="flex flex-col gap-4">
             <span class="text-surface-500 dark:text-surface-400 block mb-8">Selecciona la categoría de tu tarea:</span>
             <Dropdown v-model="task.categoriaTarea" :options="categorias" optionLabel="name" class="w-full" />
-            
             <span v-if="errors.categoriaTarea" class="text-red-500">{{ errors.categoriaTarea }}</span>
             <div class="flex flex-col gap-4">
                 <label for="nombreTarea" class="font-semibold w-full">Nombre de la tarea:</label>
                 <InputText v-model="task.nombreTarea" placeholder="Introduce el nombre de la tarea" class="w-full" />
-                
                 <span v-if="errors.nombreTarea" class="text-red-500">{{ errors.nombreTarea }}</span>
             </div>
             <div class="flex flex-col gap-4">
