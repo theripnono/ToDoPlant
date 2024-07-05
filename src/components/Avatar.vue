@@ -15,10 +15,13 @@
                 @click="seleccionarAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
         </div>
 
-
-
-        <RouterLink v-if="avatarSeleccionado" to="/info" class="start-button"><Button label="Primary">Siguiente</Button>
+        <RouterLink v-if="avatarSeleccionado" to="/info"><Button label="Primary">Siguiente</Button>
         </RouterLink>
+
+        <RouterLink v-if="avatarSeleccionado" to="/"><Button type="button" severity="secondary"
+                class="p-button-outlined">Volver</Button>
+        </RouterLink>
+
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
 </template>

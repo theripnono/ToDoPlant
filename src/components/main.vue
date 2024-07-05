@@ -6,20 +6,19 @@
       </div>
       <div>
         <Button label="Primary" @click="visible = true">Crear tarea</Button>
-      </div>  
+      </div>
 
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
-        <h3>Tareas Actuales:</h3>
-        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
-          @delete="borrarTarea(index)" />
+        <h4>Tareas Actuales:</h4>
+        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea" @delete="borrarTarea(index)" />
       </div>
 
       <div class="avatar-container">
         <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
 
-     
+
 
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
@@ -60,9 +59,9 @@ export default {
   data() {
     return {
       tareas: [{
-        nombreTarea:'Personal',
-        categoriaTarea:'asdt',
-        fecha:'28/06/2025'
+        nombreTarea: 'Personal',
+        categoriaTarea: 'asdt',
+        fecha: '28/06/2025'
       }],
       visible: false,
       nuevaTarea: { nombreTarea: '', categoriaTarea: '', fecha: '' },
@@ -124,11 +123,16 @@ export default {
   color: red;
   font-weight: bold;
 }
+
 .custom-icon {
-    color: #f59e0b;         /* Change the color */
-    font-size: 24px;    /* Change the size */
-    margin-left: 10px;  /* Add some margin */
+  color: #f59e0b;
+  /* Change the color */
+  font-size: 24px;
+  /* Change the size */
+  margin-left: 10px;
+  /* Add some margin */
 }
+
 .ok-button {
   background-color: #f44336;
   color: white;
@@ -150,11 +154,15 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
 .tareas-lista {
-    overflow-y: auto;
-    padding: 10px; /* Optional: for some padding */
-    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+  overflow-y: auto;
+  padding: 10px;
+  /* Optional: for some padding */
+  box-sizing: border-box;
+  /* Ensure padding is included in the height calculation */
 }
+
 .container {
   display: flex;
   flex-direction: row;
@@ -194,7 +202,7 @@ button {
   align-items: center;
   background-color: #C0D470;
   background-image: url("@/components/imgs/farm/farm_land.png");
-  background-size: cover; 
+  background-size: cover;
   background-repeat: repeat;
   height: 100vh;
   width: 50%;
