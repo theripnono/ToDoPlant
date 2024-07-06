@@ -14,7 +14,7 @@
             </div>
             <div class="flex flex-col gap-4">
                 <label for="fecha" class="font-semibold w-full">Fecha:</label>
-                <Calendar v-model="localTask.fecha" dateFormat="dd/mm/yy" class="w-full" />
+                <Calendar v-model="localTask.createdAt" dateFormat="dd/mm/yy" class="w-full" />
                 <span v-if="errors.fecha" class="text-red-500">{{ errors.fecha }}</span>
             </div>
             <div class="flex justify-end gap-2">
