@@ -6,35 +6,40 @@
       </div>
       <div>
         <Button label="Primary" @click="visible = true">Crear tarea</Button>
-      </div>  
+      </div>
 
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
         <h3>Tareas Actuales:</h3>
-        <ProgressSpinner v-if = "this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
-        animationDuration=".5s" aria-label="Custom ProgressSpinner"/>
+        <ProgressSpinner v-if="this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
+          animationDuration=".5s" aria-label="Custom ProgressSpinner" />
 
         <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
           @delete="borrarTarea(index)" />
       </div>
 
       <div class="avatarMove">
-            <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" class="avatar">
-        </div>
+        <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" class="avatar">
+      </div>
 
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
-        @create-task="agregarTarea"/>
+        @create-task="agregarTarea" />
 
       <!-- Modal de confirmación para eliminar tarea -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete" />
+
+      <!-- Update the ConfirmationModal component usage -->
+      <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete"
+        :taskId="deleteIndex !== null && tareas[deleteIndex] ? tareas[deleteIndex].id : null" />
     </div>
 
     <div class="background-campo">
       <div class="borde-campo"></div>
       <div class="campo">
-        <div @click=" () => console.log(index)" v-for="(parcela, index) in Array(20)"s :key="index" class="parcela" :style="estiloParcela(index)"></div>
-       
+        <div @click="() => console.log(index)" v-for="(parcela, index) in Array(20)" s :key="index" class="parcela"
+          :style="estiloParcela(index)"></div>
+
         <!-- IDEA TOOLTIP -->
         <!-- :data-parcela="index" para acceder a las parcelas. la ruta PointerEvent.target.dataset -->
       </div>
@@ -53,7 +58,7 @@
 import ConfirmationModal from './ConfirmationModal.vue';
 import TaskCard from './TaskCard.vue';
 import TaskCreationModal from './TaskCreationModal.vue';
-import {useSelectedAvatarStore} from "@/stores/selectedAvatar";
+import { useSelectedAvatarStore } from "@/stores/selectedAvatar";
 
 
 const username = "aleh";
@@ -65,10 +70,10 @@ const API_URL = `https://node-todos.vercel.app/users/${username}`;
 // https://date-fns.org/ para descargar fechas
 
 export default {
-  setup(){
-        const selectedAvatarStore = useSelectedAvatarStore()
-        return {selectedAvatarStore}
-    },
+  setup() {
+    const selectedAvatarStore = useSelectedAvatarStore()
+    return { selectedAvatarStore }
+  },
   components: {
     ConfirmationModal,
     TaskCard,
@@ -76,10 +81,10 @@ export default {
   },
   data() {
     return {
-      
+
       //Petiones GET para obtener info de la API
       //https://node-todos.vercel.app/api-docs/#/todos
-      loading : false,
+      loading: false,
 
       tareas: [
 
@@ -100,20 +105,20 @@ export default {
   },
   methods: {
 
-    setup(){
-      const constacsStore=useconcastStore();
-      return{
+    setup() {
+      const constacsStore = useconcastStore();
+      return {
         constacsStore
       }
     },
 
-    async obtenerTareas(){
+    async obtenerTareas() {
       this.loading = true
       const promesaFetch = fetch(`https://node-todos.vercel.app/users/pollo/todos`)
       const response = await promesaFetch;
       const promesaJson = response.json()
       const tasks = await promesaJson
-      
+
       this.loading = false
       this.tareas = tasks
     },
@@ -122,33 +127,33 @@ export default {
     agregarTarea(task) {
       if (this.tareas.length < 20) {
 
-        fetch(`https://node-todos.vercel.app/users/pollo/todos`,{
-          method:'POST',
-          headers:{
+        fetch(`https://node-todos.vercel.app/users/pollo/todos`, {
+          method: 'POST',
+          headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            
-            text:task.nombreTarea,
-            description:task.categoriaTarea.name,
+
+            text: task.nombreTarea,
+            description: task.categoriaTarea.name,
           }),
         })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          this.tareas.push(data);
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            this.tareas.push(data);
 
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
         this.visible = false;
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
       }
     },
-    
+
     borrarTarea(index) {
       this.deleteIndex = index;
       this.confirmVisible = true;
@@ -179,11 +184,11 @@ export default {
     },
 
 
-    
+
   },
-      //TODO REPASAR ESTA FUNCION meterla cuando se 
-    //da lick al boton plantar del componente Info.vue
-    //COOKIES para saltarte toda la morralla:
+  //TODO REPASAR ESTA FUNCION meterla cuando se 
+  //da lick al boton plantar del componente Info.vue
+  //COOKIES para saltarte toda la morralla:
   // beforeCreate(){
   //   const aboUsVisitedCookie= document.cookie.includes("about-us-visited=True");
   //   consolele.log(aboUsVisitedCookie);
@@ -191,7 +196,7 @@ export default {
   //     this.$router.push("/main");
   //   }
   // },
-  created(){
+  created() {
     this.obtenerTareas()
   }
 };
@@ -202,11 +207,16 @@ export default {
   color: red;
   font-weight: bold;
 }
+
 .custom-icon {
-    color: #f59e0b;         /* Change the color */
-    font-size: 24px;    /* Change the size */
-    margin-left: 10px;  /* Add some margin */
+  color: #f59e0b;
+  /* Change the color */
+  font-size: 24px;
+  /* Change the size */
+  margin-left: 10px;
+  /* Add some margin */
 }
+
 .ok-button {
   background-color: #f44336;
   color: white;
@@ -228,14 +238,17 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
 .tareas-lista {
-    
-    overflow-y: auto;
-    flex-wrap: wrap;
-    padding: 10px;
-    box-sizing: border-box; /* Ensure padding is included in the height calculation */
-    height: 60%;
+
+  overflow-y: auto;
+  flex-wrap: wrap;
+  padding: 10px;
+  box-sizing: border-box;
+  /* Ensure padding is included in the height calculation */
+  height: 60%;
 }
+
 .container {
   display: flex;
   flex-direction: row;
@@ -275,7 +288,7 @@ button {
   align-items: center;
   background-color: #C0D470;
   background-image: url("@/components/imgs/farm/farm_land.png");
-  background-size: cover; 
+  background-size: cover;
   background-repeat: repeat;
   height: 100vh;
   width: 50%;
@@ -316,11 +329,10 @@ button {
   margin: 5px 0;
 }
 
-.avatar{
-    position: relative;
-    height: 5rem;
-    width: 4rem;
-    top:150%
+.avatar {
+  position: relative;
+  height: 5rem;
+  width: 4rem;
+  top: 150%
 }
-
 </style>

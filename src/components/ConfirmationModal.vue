@@ -16,6 +16,10 @@ export default {
         visible: {
             type: Boolean,
             required: true
+        },
+        taskId: {
+            type: String,
+            required: true
         }
     },
     methods: {
@@ -25,6 +29,20 @@ export default {
         confirm() {
             this.$emit('confirm');
             this.$emit('update:visible', false);
+            fetch(`https://node-todos.vercel.app/users/pollo/todos/${this.taskId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    this.$emit('delete', this.taskId);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 }
