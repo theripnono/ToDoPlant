@@ -9,9 +9,12 @@
         </template>
         <template #footer>
             <div class="flex gap-4 mt-1 justify-between">
-                <Button label="Conseguida" class="w-full"><font-awesome-icon :icon="['fas', 'hand-holding-heart']"/></Button>
-                <Button label="Editar" class="w-full"><font-awesome-icon :icon="['fas', 'edit']"/></Button>
-                <Button label="Borrar" @click="emitDelete" class="w-full" ><font-awesome-icon :icon="['fas', 'trash']" /></Button>
+                <Button label="Conseguida" class="w-full"><font-awesome-icon
+                        :icon="['fas', 'hand-holding-heart']" /></Button>
+                <Button label="Editar" @click="emitEdit" class="w-full"><font-awesome-icon
+                        :icon="['fas', 'edit']" /></Button>
+                <Button label="Borrar" @click="emitDelete" class="w-full"><font-awesome-icon
+                        :icon="['fas', 'trash']" /></Button>
             </div>
         </template>
     </Card>
@@ -31,6 +34,9 @@ export default {
         },
         emitDelete() {
             this.$emit('delete', this.tarea);
+        },
+        emitEdit() {
+            this.$emit('edit', this.tarea);
         }
     }
 }

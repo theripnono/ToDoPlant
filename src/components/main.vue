@@ -14,8 +14,8 @@
         <ProgressSpinner v-if="this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
           animationDuration=".5s" aria-label="Custom ProgressSpinner" />
 
-        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
-          @delete="borrarTarea(index)" />
+        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea" @delete="borrarTarea(index)"
+          @edit="openEditModal(tarea, index)" />
       </div>
 
       <div class="avatarMove">
@@ -29,6 +29,10 @@
       <!-- Update the ConfirmationModal component usage -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete"
         :taskId="getTaskId()" />
+
+      <!-- Modal para editar tarea -->
+      <EditTaskModal v-if="taskToEdit" :visible="editVisible" :categorias="categorias" :task="taskToEdit"
+        @update:visible="editVisible = $event" @edit-task="updateTask" />
     </div>
 
     <div class="background-campo">
@@ -55,6 +59,7 @@
 import ConfirmationModal from './ConfirmationModal.vue';
 import TaskCard from './TaskCard.vue';
 import TaskCreationModal from './TaskCreationModal.vue';
+import EditTaskModal from './EditTaskModal.vue';
 import { useSelectedAvatarStore } from "@/stores/selectedAvatar";
 
 
@@ -74,7 +79,8 @@ export default {
   components: {
     ConfirmationModal,
     TaskCard,
-    TaskCreationModal
+    TaskCreationModal,
+    EditTaskModal
   },
   data() {
     return {
@@ -98,6 +104,9 @@ export default {
       ],
       confirmVisible: false,
       deleteIndex: null,
+      editVisible: false,
+      taskToEdit: null,
+      editIndex: null,
     };
   },
   methods: {
@@ -149,6 +158,18 @@ export default {
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
       }
+    },
+    openEditModal(task, index) {
+      console.log('Tarea seleccionada para editar:', task); // Añade este log
+      this.taskToEdit = { ...task };
+      this.editIndex = index;
+      this.editVisible = true;
+    },
+    updateTask(updatedTask) {
+      this.tareas.splice(this.editIndex, 1, updatedTask);
+      this.editVisible = false;
+      this.taskToEdit = null;
+      this.editIndex = null;
     },
 
     borrarTarea(index) {
