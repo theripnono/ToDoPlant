@@ -1,10 +1,10 @@
 <template>
     <Card :style="{ width: '25rem', overflow: 'hidden' }">
-        <template #title>{{ tarea.text }}</template>
-        <template #subtitle><span v-text="tarea.description"></span></template>
+        <template #title>{{ tarea.nombreTarea }}</template>
+        <template #subtitle><span v-text="tarea.categoriaTarea.name"></span></template>
         <template #content>
             <p class="m-0">
-                Día de la tarea: {{ formatDate(tarea.createdAt) }}
+                Día de la tarea: {{ formatDate(tarea.fecha) }}
             </p>
         </template>
         <template #footer>
