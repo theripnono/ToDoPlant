@@ -1,10 +1,10 @@
 import "./assets/main.css";
 import "primevue/resources/themes/aura-light-amber/theme.css";
+import { createPinia } from "pinia";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTrash, faEdit, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
-
+import { faTrash, faEdit, faHandHoldingHeart } from "@fortawesome/free-solid-svg-icons";
 
 import { createApp } from "vue";
 import PrimeVue from "primevue/config";
@@ -15,8 +15,8 @@ import Textarea from "primevue/textarea";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
-import Splitter from 'primevue/splitter';
-import SplitterPanel from 'primevue/splitterpanel';
+import Splitter from "primevue/splitter";
+import SplitterPanel from "primevue/splitterpanel";
 
 import { createMemoryHistory, createRouter } from "vue-router";
 
@@ -67,5 +67,5 @@ createApp(App)
   .component("Calendar", Calendar)
   .component("Splitter", Splitter)
   .component("SplitterPanel", SplitterPanel)
-  .component('font-awesome-icon', FontAwesomeIcon)
+  .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");

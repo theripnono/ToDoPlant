@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="container">
         <Card style="width: 25rem; overflow: hidden; background-color: beige;">
             <template #header>
@@ -33,6 +34,41 @@
                 </div>
             </template>
         </Card>
+=======
+<div class="container">
+    <Card style="width: 25rem; overflow: hidden; background-color: beige;">
+        <template #header>
+         
+            <img class="imageHeader" alt="user header" src="@/components/imgs/card_info.png" />
+        </template>
+        <template #title>¿Cómo se planta?</template>
+        <template #subtitle>Crea una tarea</template>
+        <template #content>
+            <p class="m-0">
+                Cada vez que crees una nueva tarea, se plantará la tarea.
+            </p>
+        </template>
+    </Card>
+    <Card class="delayCard" style="width: 25rem; overflow: hidden; background-color:beige;">
+        <template #header>
+            <img class="imageHeader" alt="user header" src="@/components/imgs/card_info2.png" />
+        </template>
+        <template #title>¿Cómo se cosecha?</template>
+        <template #subtitle>Termina la tarea</template>
+        <template #content>
+            <p class="m-0">
+                Cuando termines la tarea, podrás cosechar la planta.
+            </p>
+        </template>
+        <template #footer>
+            <div style="text-align: center;" class="flex gap-4">
+              
+                <RouterLink to="/main" class="start-button">¡A plantar!</RouterLink>
+                
+            </div>
+        </template>
+    </Card>
+>>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
         <div class="avatar-container polloMove">
             <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
         </div>
@@ -69,11 +105,17 @@ export default {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 .delayCard {
     animation: fadeIn 7s ease-in-out forwards;
     /* Añade esta línea */
     opacity: 0;
     /* Inicia con el botón invisible */
+=======
+.delayCard{
+    animation: fadeIn 2s ease-in-out forwards; /* Añade esta línea */
+    opacity: 0; /* Inicia con el botón invisible */
+>>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
 }
 
 @keyframes fadeIn {
@@ -115,7 +157,7 @@ export default {
     position: absolute;
     left: 30%;
     bottom: -10;
-    animation: pollo-animation 1s ease-in-out infinite;
+    animation: pollo-animation 0.75s ease-in-out infinite;
 }
 
 @keyframes pollo-animation {
@@ -144,8 +186,5 @@ export default {
     }
 }
 
-/* Añade 'animation-timing-function' para cada rebote */
-.polloMove {
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-}
+
 </style>
