@@ -1,7 +1,8 @@
 <template>
     <div class="container">
         <h1 class="title">¡Bienvenido a tu listado de tareas en formato granero!</h1>
-        <RouterLink to="/avatar"><Button label="Primary">Empezar</Button></RouterLink>
+
+        <RouterLink to="/avatar" class="start-button">Empezar</RouterLink>
     </div>
 </template>
 

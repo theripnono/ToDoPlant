@@ -15,13 +15,9 @@
                 @click="seleccionarAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
         </div>
 
-        <RouterLink v-if="avatarSeleccionado" to="/info"><Button label="Primary">Siguiente</Button>
-        </RouterLink>
 
-        <RouterLink v-if="avatarSeleccionado" to="/"><Button type="button" severity="secondary"
-                class="p-button-outlined">Volver</Button>
-        </RouterLink>
 
+        <RouterLink v-if="avatarSeleccionado" to="/info" class="start-button">Siguiente</RouterLink>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
 </template>
@@ -71,5 +67,17 @@ export default {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 2rem;
+}
+
+
+
+.start-button:hover {
+    background-color: #f1e0d1;
+    color: #cda582;
+}
+
+.seleccionado {
+    border: 4px solid orange;
+    border-radius: 7px;
 }
 </style>

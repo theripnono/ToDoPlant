@@ -10,8 +10,9 @@
 
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
-        <h4>Tareas Actuales:</h4>
-        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea" @delete="borrarTarea(index)" />
+        <h3>Tareas Actuales:</h3>
+        <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
+          @delete="borrarTarea(index)" />
       </div>
 
       <div class="avatar-container">

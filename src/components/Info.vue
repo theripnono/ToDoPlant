@@ -15,27 +15,26 @@
         </Card>
         <Card class="delayCard" style="width: 25rem; overflow: hidden; background-color:beige;">
             <template #header>
+
                 <img class="imageHeader" alt="user header" src="@/components/imgs/card_info2.png" />
             </template>
-
             <template #title>¿Cómo se cosecha?</template>
-
             <template #subtitle>Termina la tarea</template>
-
             <template #content>
                 <p class="m-0">
                     Cuando termines la tarea, podrás cosechar la planta.
                 </p>
             </template>
+            <template #footer>
+                <div style="text-align: center;" class="flex gap-4">
+
+                    <RouterLink to="/main" class="start-button">¡A plantar!</RouterLink>
+
+                </div>
+            </template>
         </Card>
-
-
-        <div>
-
-            <RouterLink to="/main"><Button label="Primary">¡A plantar!</Button></RouterLink>
-            <RouterLink to="/avatar"><Button type="button" severity="secondary" class="p-button-outlined">Volver</Button>
-            </RouterLink>
-
+        <div class="avatar-container polloMove">
+            <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
         </div>
 
         <div class="avatar-container polloMove">
