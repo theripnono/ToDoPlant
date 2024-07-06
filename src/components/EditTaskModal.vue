@@ -2,7 +2,8 @@
     <Dialog :visible="visible" modal header="Editar Tarea" :style="{ width: '25rem' }">
         <div class="flex flex-col gap-4">
             <span class="text-surface-500 dark:text-surface-400 block mb-8">Selecciona la categoría de tu tarea:</span>
-            <Dropdown v-model="localTask.categoriaTarea" :options="categorias" optionLabel="name" class="w-full" />
+            <Dropdown v-model="selectedCategory" :options="categorias" optionLabel="name" optionValue="name"
+                placeholder="Select a Category" />
 
             <span v-if="errors.categoriaTarea" class="text-red-500">{{ errors.categoriaTarea }}</span>
             <div class="flex flex-col gap-4">
@@ -65,7 +66,8 @@ export default {
     data() {
         return {
             localTask: {},
-            errors: {}
+            errors: {},
+            selectedCategory: null
         };
     },
     watch: {
@@ -73,6 +75,7 @@ export default {
             handler(newTask) {
                 console.log('Datos de la tarea recibidos en el modal:', newTask);
                 this.localTask = { ...newTask };
+                this.selectedCategory = newTask ? newTask.description : null;
                 console.log('Datos de localTask:', this.localTask);
             },
             immediate: true
@@ -87,7 +90,7 @@ export default {
             if (!this.localTask.text) {
                 this.errors.nombreTarea = 'Nombre de la tarea es obligatorio';
             }
-            if (!this.localTask.categoriaTarea) {
+            if (!this.selectedCategory) {
                 this.errors.categoriaTarea = 'Categoría es obligatorio';
             }
             if (!this.localTask.fecha) {
