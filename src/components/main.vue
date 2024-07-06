@@ -11,6 +11,12 @@
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
         <h3>Tareas Actuales:</h3>
+<<<<<<< HEAD
+=======
+        <ProgressSpinner v-if = "this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
+        animationDuration=".5s" aria-label="Custom ProgressSpinner"/>
+
+>>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
         <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
           @delete="borrarTarea(index)" />
       </div>
@@ -55,6 +61,17 @@ import TaskCard from './TaskCard.vue';
 import TaskCreationModal from './TaskCreationModal.vue';
 
 
+<<<<<<< HEAD
+=======
+const username = "aleh";
+const API_URL = `https://node-todos.vercel.app/users/${username}`;
+
+//get method:https://node-todos.vercel.app/users/aleh/todos
+//documentacion: https://node-todos.vercel.app/api-docs/
+
+// https://date-fns.org/ para descargar fechas
+
+>>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
 export default {
   components: {
     ConfirmationModal,
@@ -91,7 +108,32 @@ export default {
   methods: {
     agregarTarea(task) {
       if (this.tareas.length < 20) {
+<<<<<<< HEAD
         this.tareas.push(task);
+=======
+
+        fetch(`https://node-todos.vercel.app/users/pollo/todos`,{
+          method:'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            
+            text:task.nombreTarea,
+            description:task.categoriaTarea.name,
+          }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.tareas.push(data);
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+>>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
         this.visible = false;
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
@@ -167,11 +209,20 @@ export default {
 }
 
 .tareas-lista {
+<<<<<<< HEAD
   overflow-y: auto;
   padding: 10px;
   /* Optional: for some padding */
   box-sizing: border-box;
   /* Ensure padding is included in the height calculation */
+=======
+    
+    overflow-y: auto;
+    flex-wrap: wrap;
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+    height: 60%;
+>>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
 }
 
 .container {
