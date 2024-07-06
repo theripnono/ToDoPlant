@@ -26,9 +26,6 @@
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
         @create-task="agregarTarea" />
 
-      <!-- Modal de confirmación para eliminar tarea -->
-      <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete" />
-
       <!-- Update the ConfirmationModal component usage -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete"
         :taskId="getTaskId()" />
