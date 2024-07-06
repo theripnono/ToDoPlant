@@ -29,6 +29,7 @@ export default {
         confirm() {
             this.$emit('confirm');
             this.$emit('update:visible', false);
+            console.log("Eliminando", this.taskId);
             fetch(`https://node-todos.vercel.app/users/pollo/todos/${this.taskId}`, {
                 method: 'DELETE',
                 headers: {

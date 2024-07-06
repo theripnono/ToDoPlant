@@ -31,7 +31,7 @@
 
       <!-- Update the ConfirmationModal component usage -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete"
-        :taskId="deleteIndex !== null && tareas[deleteIndex] ? tareas[deleteIndex].id : null" />
+        :taskId="getTaskId()" />
     </div>
 
     <div class="background-campo">
@@ -181,6 +181,13 @@ export default {
     },
     limpiarError() {
       this.error = '';
+    },
+    getTaskId() {
+      if (this.deleteIndex !== null && this.tareas[this.deleteIndex]) {
+        return this.tareas[this.deleteIndex].id;
+      } else {
+        return null;
+      }
     },
 
 
