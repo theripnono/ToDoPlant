@@ -15,7 +15,6 @@
     </Card>
     <Card class="delayCard" style="width: 25rem; overflow: hidden; background-color:beige;">
         <template #header>
-         
             <img class="imageHeader" alt="user header" src="@/components/imgs/card_info2.png" />
         </template>
         <template #title>¿Cómo se cosecha?</template>
@@ -72,7 +71,7 @@ export default {
 }
 
 .delayCard{
-    animation: fadeIn 7s ease-in-out forwards; /* Añade esta línea */
+    animation: fadeIn 2s ease-in-out forwards; /* Añade esta línea */
     opacity: 0; /* Inicia con el botón invisible */
 }
 
@@ -112,7 +111,7 @@ export default {
     position: absolute;
     left: 30%;
     bottom: -10;
-    animation: pollo-animation 1s ease-in-out infinite;
+    animation: pollo-animation 0.75s ease-in-out infinite;
 }
 
 @keyframes pollo-animation {
@@ -135,8 +134,5 @@ export default {
     }
 }
 
-/* Añade 'animation-timing-function' para cada rebote */
-.polloMove {
-    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
-}
+
 </style>

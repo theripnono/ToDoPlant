@@ -11,8 +11,8 @@
       <!-- Lista de Tareas en tarjetas -->
       <div class="tareas-lista">
         <h3>Tareas Actuales:</h3>
-        <ProgressSpinner v-if = "this.loading" style="width: 50px; height: 50px" strokeWidth="8" fill="transparent"
-        animationDuration=".5s" aria-label="Custom ProgressSpinner" />
+        <ProgressSpinner v-if = "this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
+        animationDuration=".5s" aria-label="Custom ProgressSpinner"/>
 
         <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea"
           @delete="borrarTarea(index)" />
@@ -60,7 +60,8 @@ const username = "aleh";
 const API_URL = `https://node-todos.vercel.app/users/${username}`;
 
 //get method:https://node-todos.vercel.app/users/aleh/todos
-//post method:https://node-todos.vercel.app/users/aleh/todos
+//documentacion: https://node-todos.vercel.app/api-docs/
+
 // https://date-fns.org/ para descargar fechas
 
 export default {
@@ -121,8 +122,6 @@ export default {
     agregarTarea(task) {
       if (this.tareas.length < 20) {
 
-        // event.preventDefault();
-        // fetch(`${API_URL}/todos`)
         fetch(`https://node-todos.vercel.app/users/pollo/todos`,{
           method:'POST',
           headers:{
@@ -230,9 +229,12 @@ export default {
   align-items: center;
 }
 .tareas-lista {
+    
     overflow-y: auto;
-    padding: 10px; /* Optional: for some padding */
+    flex-wrap: wrap;
+    padding: 10px;
     box-sizing: border-box; /* Ensure padding is included in the height calculation */
+    height: 60%;
 }
 .container {
   display: flex;

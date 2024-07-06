@@ -1,10 +1,11 @@
+<!--Seleccion de Avatar/pagina 2-->
 <template>
     <div class="container">
         <h1 class="title">Selecciona un Avatar:</h1>
         
         <div class="listaAvatares">
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[0]}" style="background-color: white; border-radius: 5px; border:none"
-                @click="seleccionarAvatar(avatarList[0])"><img src="/imgs/avatars/Avatar1.png" alt=""></button>
+                @click="seleccionarAvatar(avatarList[0])"><img src="/imgs/avatars/Avatar1.png" alt="avatar 1"></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[1])"><img src="/imgs/avatars/Avatar2.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }" style="background-color: white; border-radius: 5px; border:none"
@@ -46,7 +47,6 @@ export default {
     methods: {
         seleccionarAvatar(avatar) {
             this.avatarSeleccionado = avatar;
-            this.errorMessage = ""; // Clear error essage when an avatar is selected
             this.selectedAvatarStore.setAvatar(avatar)
         },
        
@@ -114,8 +114,9 @@ export default {
     position: absolute;
     left: 50%;
     top: 75%;
-    animation: animation 1s ease-in-out infinite;
+    animation: animation 0.75s ease-in-out infinite;
 }
+
 @keyframes animation {
     0%, 100% {
         transform: translateY(0);

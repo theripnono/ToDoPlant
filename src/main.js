@@ -1,10 +1,11 @@
 import "./assets/main.css";
 import "primevue/resources/themes/aura-light-amber/theme.css";
 import { createPinia } from "pinia"
+
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faTrash, faEdit, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
-
 
 import { createApp } from "vue";
 import PrimeVue from "primevue/config";
