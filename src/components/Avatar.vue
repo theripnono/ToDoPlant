@@ -2,20 +2,8 @@
 <template>
     <div class="container">
         <h1 class="title">Selecciona un Avatar:</h1>
-
+        
         <div class="listaAvatares">
-<<<<<<< HEAD
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[0] }"
-                @click="seleccionarAvatar(avatarList[0])"><img src="@/components/avatars/Avatar1.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }"
-                @click="seleccionarAvatar(avatarList[1])"><img src="@/components/avatars/Avatar2.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[2] }"
-                @click="seleccionarAvatar(avatarList[2])"><img src="@/components/avatars/Avatar3.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[3] }"
-                @click="seleccionarAvatar(avatarList[3])"><img src="@/components/avatars/Avatar4.png" alt=""></button>
-            <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }"
-                @click="seleccionarAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
-=======
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[0]}" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[0])"><img src="/imgs/avatars/Avatar1.png" alt="avatar 1"></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[1] }" style="background-color: white; border-radius: 5px; border:none"
@@ -26,50 +14,62 @@
                 @click="seleccionarAvatar(avatarList[3])"><img src="/imgs/avatars/Avatar4.png" alt=""></button>
             <button :class="{ seleccionado: avatarSeleccionado === avatarList[4] }" style="background-color: white; border-radius: 5px; border:none"
                 @click="seleccionarAvatar(avatarList[4])"><img src="/imgs/avatars/Avatar5.png" alt=""></button>
->>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
         </div>
 
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> parent of 515cc6e (Merge pull request #11 from theripnono/dvd-branch-Logic)
-
         <RouterLink v-if="avatarSeleccionado" to="/info" class="start-button">Siguiente</RouterLink>
-        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+        
+        
+        <!-- <img :src="selectedAvatarStore.avatar"> -->
+        <div class="avatarMove">
+            <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" class="avatar">
+        </div>
+
     </div>
+
 </template>
 
 <script>
+import {useSelectedAvatarStore} from "@/stores/selectedAvatar"
+
 export default {
+    setup(){
+        const selectedAvatarStore = useSelectedAvatarStore()
+        return {selectedAvatarStore}
+    },
     data() {
         return {
-            avatarList: ["avatar1", "avatar2", "avatar3", "avatar4", "avatar5"],
+            avatarList: ["Avatar1", "Avatar2", "Avatar3", "Avatar4", "Avatar5"],
             avatarSeleccionado: "",
-            errorMessage: ""
+            errorMessage: "",
+       
         }
     },
     methods: {
         seleccionarAvatar(avatar) {
             this.avatarSeleccionado = avatar;
-<<<<<<< HEAD
-            this.errorMessage = ""; // Clear error message when an avatar is selected
-=======
             this.selectedAvatarStore.setAvatar(avatar)
->>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
         },
-        handleNextClick() {
-            if (!this.avatarSeleccionado) {
-                this.errorMessage = "Con lo monos que son... no entiendo como no escoges uno";
-            } else {
-                this.$router.push('/info');
-            }
-        }
+       
     }
 }
 </script>
 
 <style scoped>
+.start-button {
+    background-color: #cda582;
+    color: white;
+    font-size: 24px;
+    text-decoration: none; /* Esto oculta la subrayado */
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background-color: #f1e0d1;
+    color: #cda582;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -102,8 +102,6 @@ export default {
     border: 4px solid orange;
     border-radius: 7px;
 }
-<<<<<<< HEAD
-=======
 
 .avatar{
     position: relative;
@@ -138,5 +136,4 @@ export default {
         
     }
 }
->>>>>>> 88141e30b4351cdff1fbb8cabd9c5735c5f5154f
 </style>
