@@ -15,7 +15,11 @@
                 @click="seleccionarAvatar(avatarList[4])"><img src="@/components/avatars/Avatar5.png" alt=""></button>
         </div>
 
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> parent of 515cc6e (Merge pull request #11 from theripnono/dvd-branch-Logic)
 
         <RouterLink v-if="avatarSeleccionado" to="/info" class="start-button">Siguiente</RouterLink>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>

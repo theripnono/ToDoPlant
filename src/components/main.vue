@@ -19,7 +19,11 @@
         <img src="@/components/avatars/Avatar1.png" alt="Icono avatar" class="avatar">
       </div>
 
+<<<<<<< HEAD
 
+=======
+     
+>>>>>>> parent of 515cc6e (Merge pull request #11 from theripnono/dvd-branch-Logic)
 
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
@@ -60,9 +64,15 @@ export default {
   data() {
     return {
       tareas: [{
+<<<<<<< HEAD
         nombreTarea: 'Personal',
         categoriaTarea: 'asdt',
         fecha: '28/06/2025'
+=======
+        nombreTarea:'Personal',
+        categoriaTarea:'asdt',
+        fecha:'28/06/2025'
+>>>>>>> parent of 515cc6e (Merge pull request #11 from theripnono/dvd-branch-Logic)
       }],
       visible: false,
       nuevaTarea: { nombreTarea: '', categoriaTarea: '', fecha: '' },
