@@ -93,20 +93,52 @@ export default {
             if (!this.selectedCategory) {
                 this.errors.categoriaTarea = 'Categoría es obligatorio';
             }
-            if (!this.localTask.fecha) {
-                this.errors.fecha = 'Fecha es obligatorio';
-            }
+
             return Object.keys(this.errors).length === 0;
+        },
+
+        editTask() {
+            console.log("ESTOY DENTRO DEL EDITTASK", this.localTask)
+            if (this.validateForm()) {
+                console.log("TEXT ID: ", this.localTask.id)
+                console.log("TEXT: ", this.localTask.text)
+                console.log("TEXT DESCRIPTION: ", this.selectedCategory)
+                
+            
+
+                // Realiza el fetch PATCH aquí
+                let id = this.localTask.id
+                fetch(`https://node-todos.vercel.app/users/pollo/todos/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id:this.localTask.id,
+                        text: this.localTask.text,       
+                        description: this.selectedCategory,
+                        completed: false,
+                        author:'pollo',
+                        tags: ["beach"],
+                        createdAt: "2020-03-10T04:05:06.157Z"
+                    }),
+                    
+                })
+                
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('Tarea actualizada:', data);
+                    this.$emit('edit-task', data);
+                    this.close();
+                })
+                .catch((error) => {
+                    console.error('Error al actualizar la tarea:', error);
+                });
+            }
         },
         close() {
             this.$emit('update:visible', false);
         },
-        editTask() {
-            if (this.validateForm()) {
-                this.$emit('edit-task', this.localTask);
-                this.close();
-            }
-        }
     }
 }
 </script>

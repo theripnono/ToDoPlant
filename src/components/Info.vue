@@ -27,8 +27,7 @@
         <template #footer>
             <div style="text-align: center;" class="flex gap-4">
               
-                <RouterLink to="/main" class="start-button">¡A plantar!</RouterLink>
-                
+                <RouterLink to="/main" class="start-button">¡A plantar!</RouterLink>        
             </div>
         </template>
     </Card>
