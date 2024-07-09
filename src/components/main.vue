@@ -51,8 +51,22 @@
           <button @click="limpiarError" class="ok-button">OK</button>
         </div>
       </div>
+        <!-- COWS -->
+      <div class="cow-container cowMove">
+        <img src="@/components/imgs/animated_gifs/animated_cow.gif" alt="moving cow" class="cow">
+      </div>
+
+      <!-- Audio -->
+      <div id="sound">
+        <Button type="button" value="sound" @click="playMusic"</Button>
+      </div>
+      <!-- <audio loop autoplay class="play-icon">
+        <source src="@/components/audio/flute.wav" type="audio/wav" >
+      </audio> -->
     </div>
+ 
   </div>
+
 </template>
 
 <script>
@@ -159,12 +173,16 @@ export default {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
       }
     },
+
+
     openEditModal(task, index) {
       console.log('Tarea seleccionada para editar:', task); // Añade este log
+      
       this.taskToEdit = { ...task };
       this.editIndex = index;
       this.editVisible = true;
     },
+
     updateTask(updatedTask) {
       this.tareas.splice(this.editIndex, 1, updatedTask);
       this.editVisible = false;
@@ -223,6 +241,12 @@ export default {
   // },
   created() {
     this.obtenerTareas()
+  },
+  
+  // audio button
+    playMusic(){
+    var music = new Audio('@/components/audio/flute.wav');
+    music.play();
   }
 };
 </script>
@@ -302,9 +326,6 @@ button {
   margin-left: 50px;
 }
 
-.avatar {
-  width: 50px;
-}
 
 .background-campo {
   display: flex;
@@ -358,6 +379,55 @@ button {
   position: relative;
   height: 5rem;
   width: 4rem;
-  top: 150%
+}
+
+
+/* COW */
+.cow{
+  position: relative;
+}
+.cowMove {
+    position: absolute;
+    left: 70%;
+    bottom: 100px;
+    animation: cow-animation 30s ease-in-out infinite;
+}
+
+
+
+@keyframes cow-animation {
+  0% {
+    transform: translate(0, 0) scaleX(1);
+  }
+  10%{
+    transform: translate(10vw, 10vh);
+  }
+  20%{
+    transform: translate(10vw, 10vh) scaleX(-1);
+  }
+  30%{
+    transform: translate(10vw, 0vh) scaleX(-1);
+  }
+  40%{
+    transform: translate(10vw, 0vh) scaleX(-1);
+  } 
+  50%{
+    transform: translate(0vw, 10vh) scaleX(-1);
+  }
+  60%{
+    transform: translate(0vw, 10vh) scaleX(1);
+  }
+  70%{
+    transform: translate(10vw, 10vh) scaleX(1);
+  }
+  75%{
+    transform: translate(10vw, 10vh) scaleX(-1);
+  }
+  80%{
+    transform: translate(10vw, 10vh) scaleX(-1);
+  }
+  90%{
+    transform: translate(0vw, 0vh) scaleX(-1);
+  }
 }
 </style>
