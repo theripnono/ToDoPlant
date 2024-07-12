@@ -1,5 +1,5 @@
 <template>
-    <Dialog :visible="visible" modal header="Finalizar Tarea" :style="{ width: '20rem' }">
+    <Dialog @update:visible="close" :visible="visible" modal header="Finalizar Tarea" :style="{ width: '20rem' }">
         <span>¿Quieres cosechar la tarea?</span>
         <p></p>
         <div class="flex justify-end gap-2 mt-4">

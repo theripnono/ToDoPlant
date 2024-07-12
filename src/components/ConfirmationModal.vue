@@ -1,5 +1,5 @@
 <template>
-    <Dialog :visible="visible" modal header="Confirmar Eliminación" :style="{ width: '20rem' }">
+    <Dialog @update:visible="close" :visible="visible" modal header="Confirmar Eliminación" :style="{ width: '20rem' }">
         <span>¿Estás seguro de que deseas eliminar esta tarea?</span>
         <p></p>
         <div class="flex justify-end gap-2 mt-4">

@@ -1,5 +1,5 @@
 <template>
-    <Dialog :visible="visible" modal header="Editar Tarea" :style="{ width: '25rem' }">
+    <Dialog @update:visible="close" :visible="visible" modal header="Editar Tarea" :style="{ width: '25rem' }">
         <div class="flex flex-col gap-4">
             <span class="text-surface-500 dark:text-surface-400 block mb-8">Selecciona la categoría de tu tarea:</span>
             <Dropdown v-model="selectedCategory" :options="categorias" optionLabel="name" optionValue="name"
