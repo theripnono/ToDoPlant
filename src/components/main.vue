@@ -33,7 +33,7 @@
         :taskId="getTaskId()" />
       
         <!-- HECHO -->
-        <CompleteModal :visible="completeVisible" @update:visible="handleVisibilityChangeComplete" @confirm="confirmComplete"
+        <CompleteModal :visible="completeVisible" @update:visible="handleVisibilityChangeComplete" @confirm2="confirmComplete"
         :taskId="getTaskId()" />
 
       <!-- Modal para editar tarea -->
@@ -65,11 +65,11 @@
 
       <!-- Audio -->
       <!-- <div id="sound">
-        <Button type="button" value="sound" @click="playMusic"</Button>
-      </div>
+        <Button type="button" value="sound" @click="playMusic" />
+      </div> -->
       <audio loop autoplay class="play-icon">
         <source src="@/components/audio/flute.wav" type="audio/wav" >
-      </audio> --> 
+      </audio> 
     </div>
  
   </div>
@@ -227,7 +227,7 @@ export default {
     handleVisibilityChangeComplete(newValue) {
     this.completeVisible = newValue;
     },
-
+    
     estiloParcela(index) {
       const imagenParcela = this.tareas.length > index ? '/imgs/germinada.png' : '/imgs/parcela.png';
       return {
@@ -387,8 +387,6 @@ button {
   border-radius: 5px;
 }
 
-
-
 .card {
   border: 1px solid #ccc;
   margin: 10px;
@@ -411,8 +409,11 @@ button {
 
 
 /* COW */
+
 .cow{
   position: relative;
+  height: 7rem;
+  width:7rem;
 }
 .cowMove {
     position: absolute;

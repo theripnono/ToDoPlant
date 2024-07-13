@@ -16,6 +16,7 @@ import Textarea from "primevue/textarea";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
+import Tooltip from 'primevue/tooltip';
 
 import ProgressSpinner from 'primevue/progressspinner';
 
@@ -68,6 +69,7 @@ createApp(App)
   .component("Dropdown", Dropdown)
   .component("Textarea", Textarea)
   .component("Card", Card)
+  .component("Tooltip", Tooltip)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
   .component("ProgressSpinner", ProgressSpinner)
