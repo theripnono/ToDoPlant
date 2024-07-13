@@ -4,7 +4,7 @@
         <p></p>
         <div class="flex justify-end gap-2 mt-4">
             <img src="/src/components/imgs/animated_gifs/growth_plant.gif" alt="growth">
-            <Button label="Recoger" @click="close" class="p-button-secondary">Gracias</Button>
+            <Button label="Recoger" @click="close" class="p-button-primary">Gracias</Button>
 
         </div>
     </Dialog>
