@@ -10,8 +10,8 @@
     <template #footer>
       <div class="flex gap-4 mt-1 justify-between">
         <Button label="Conseguida" class="w-full" @click="emitComplete"><font-awesome-icon
-            :icon="['fas', 'seedling']" /></Button>
-        <Button label="Editar" @click="emitEdit" class="w-full"><font-awesome-icon :icon="['fas', 'edit']" /></Button>
+            :icon="['fas', 'check']" /></Button>
+        <Button label="Editar" @click="emitEdit" class="w-full"><font-awesome-icon :icon="['fas', 'pen']" /></Button>
         <Button label="Borrar" @click="emitDelete" class="w-full"><font-awesome-icon
             :icon="['fas', 'trash']" /></Button>
       </div>
