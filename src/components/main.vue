@@ -24,6 +24,22 @@
         <img :src="`/imgs/avatars/${selectedAvatarStore.avatar}.png`" class="avatar">
       </div>
 
+      <!-- Audio -->
+      <!-- <div id="sound">
+        <Button type="button" value="sound" @click="playMusic" />
+      </div> -->
+      <audio loop autoplay controls volume="0.2" class="play-icon">
+        <source src="@/components/audio/flute.wav" type="audio/wav">
+      </audio>
+
+      <audio loop autoplay>
+        <source src="@/components/audio/bird-whistling-ambience.mp3" type="audio/mp3">
+      </audio>
+
+      <audio>
+        <source src="@/components/audio/cow-mooing-loudly.mp3" type="audio/mp3">
+      </audio>
+
       <!-- Modal para crear tarea -->
       <TaskCreationModal :visible="visible" :categorias="categorias" @update:visible="visible = $event"
         @create-task="agregarTarea" />
@@ -63,16 +79,11 @@
       </div>
       <!-- COWS -->
       <div class="cow-container cowMove">
-        <img src="@/components/imgs/animated_gifs/animated_cow.gif" alt="moving cow" class="cow">
+        <img src="@/components/imgs/animated_gifs/animated_cow.gif" alt="moving cow" class="cow" id="cow-gif"
+          @click="playCowSound">
       </div>
 
-      <!-- Audio -->
-      <!-- <div id="sound">
-        <Button type="button" value="sound" @click="playMusic" />
-      </div> -->
-      <audio loop autoplay class="play-icon">
-        <source src="@/components/audio/flute.wav" type="audio/wav">
-      </audio>
+
     </div>
 
   </div>
@@ -87,6 +98,8 @@ import EditTaskModal from './EditTaskModal.vue';
 import CompleteModal from './CompleteModal.vue';
 import { useSelectedAvatarStore } from "@/stores/selectedAvatar";
 import ShowGifCompleteModal from './ShowGifCompleteModal.vue';
+
+import cowSoundFile from '@/components/audio/cow-mooing-loudly.mp3';
 
 
 const username = "aleh";
@@ -187,6 +200,17 @@ export default {
       } else {
         this.error = 'No puedes crear más tareas. El máximo es 20.';
       }
+    },
+    playCowSound() {
+      const cowSound = new Audio(cowSoundFile);
+
+      cowSound.addEventListener('error', function (event) {
+        console.error('Error al cargar el archivo de sonido:', event);
+      });
+
+      cowSound.play().catch((error) => {
+        console.error('Error al reproducir el sonido:', error);
+      });
     },
 
 
