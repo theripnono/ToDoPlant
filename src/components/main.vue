@@ -40,6 +40,9 @@
       <EditTaskModal v-if="taskToEdit" :visible="editVisible" :categorias="categorias" :task="taskToEdit"
         @update:visible="editVisible = $event" @edit-task="updateTask" />
 
+      <ShowGifCompleteModal :visible="showGifCompleteVisible" @update:visible="handleVisibilityChangeComplete"
+        @confirm="showConfirmModal" />
+
     </div>
 
     <div class="background-campo">
@@ -83,6 +86,7 @@ import TaskCreationModal from './TaskCreationModal.vue';
 import EditTaskModal from './EditTaskModal.vue';
 import CompleteModal from './CompleteModal.vue';
 import { useSelectedAvatarStore } from "@/stores/selectedAvatar";
+import ShowGifCompleteModal from './ShowGifCompleteModal.vue';
 
 
 const username = "aleh";
@@ -103,7 +107,8 @@ export default {
     TaskCard,
     TaskCreationModal,
     EditTaskModal,
-    CompleteModal
+    CompleteModal,
+    ShowGifCompleteModal
   },
   data() {
     return {
@@ -130,6 +135,7 @@ export default {
       editVisible: false,
       taskToEdit: null,
       editIndex: null,
+      showGifCompleteVisible: false,
     };
   },
   methods: {
@@ -207,6 +213,15 @@ export default {
       this.tareas.splice(this.deleteIndex, 1);
       this.confirmVisible = false;
       this.deleteIndex = null;
+
+    },
+
+    showCompleteModal() {
+      this.completeVisible = true;
+    },
+
+    showConfirmModal() {
+      this.showGifCompleteVisible = false;
     },
 
     completarTarea(index) {
@@ -217,6 +232,7 @@ export default {
     confirmComplete() {
       this.tareas.splice(this.deleteIndex, 1);
       this.completeVisible = false;
+      this.showGifCompleteVisible = true;
       this.deleteIndex = null;
     },
 
@@ -226,6 +242,10 @@ export default {
 
     handleVisibilityChangeComplete(newValue) {
       this.completeVisible = newValue;
+    },
+
+    handleShowVisibilityChange(newValue) {
+      this.showGifCompleteVisible = newValue;
     },
 
     estiloParcela(index) {
