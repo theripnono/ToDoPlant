@@ -4,7 +4,6 @@
         <p></p>
         <div class="flex justify-end gap-2 mt-4">
             <Button label="No" @click="close" class="p-button-secondary">No</Button>
-            <p></p>
             <Button label="Sí" @click="confirm" class="p-button-primary"></Button>
         </div>
     </Dialog>
