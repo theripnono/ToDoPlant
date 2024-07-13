@@ -40,7 +40,7 @@
       <EditTaskModal v-if="taskToEdit" :visible="editVisible" :categorias="categorias" :task="taskToEdit"
         @update:visible="editVisible = $event" @edit-task="updateTask" />
 
-      <ShowGifCompleteModal :visible="showGifCompleteVisible" @update:visible="handleVisibilityChangeComplete"
+      <ShowGifCompleteModal :visible="showGifCompleteVisible" @update:visible="handleShowVisibilityChange"
         @confirm="showConfirmModal" />
 
     </div>
