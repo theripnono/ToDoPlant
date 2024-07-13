@@ -1,11 +1,10 @@
 import "./assets/main.css";
 import "primevue/resources/themes/aura-light-amber/theme.css";
-import { createPinia } from "pinia"
-
+import { createPinia } from "pinia";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faTrash, faEdit, faHandHoldingHeart } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faHandHoldingHeart, faSeedling } from "@fortawesome/free-solid-svg-icons";
 
 import { createApp } from "vue";
 import PrimeVue from "primevue/config";
@@ -16,10 +15,9 @@ import Textarea from "primevue/textarea";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
-import Tooltip from 'primevue/tooltip';
+import Tooltip from "primevue/tooltip";
 
-import ProgressSpinner from 'primevue/progressspinner';
-
+import ProgressSpinner from "primevue/progressspinner";
 
 import { createWebHistory, createRouter } from "vue-router";
 
@@ -30,7 +28,7 @@ import Avatar from "./components/Avatar.vue";
 
 import App from "./App.vue";
 
-const pinia = createPinia()
+const pinia = createPinia();
 
 // Crear las rutas
 const routes = [
@@ -58,7 +56,7 @@ const router = createRouter({
 });
 
 // Añadir los elementos de PrimeVue aqui enlanzandolos con un  '.'
-library.add(faHandHoldingHeart, faTrash, faEdit);
+library.add(faHandHoldingHeart, faTrash, faEdit, faSeedling);
 
 createApp(App)
   .use(PrimeVue)
@@ -73,5 +71,5 @@ createApp(App)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
   .component("ProgressSpinner", ProgressSpinner)
-  .component('font-awesome-icon', FontAwesomeIcon)
+  .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");
