@@ -13,9 +13,11 @@
         <h3>Tareas Actuales:</h3>
         <ProgressSpinner v-if="this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
           animationDuration=".5s" aria-label="Custom ProgressSpinner" />
-
+      
+      
         <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea" @delete="borrarTarea(index)"
-          @edit="openEditModal(tarea, index)" />
+          @edit="openEditModal(tarea, index)"  @complete="completarTarea(index)"/>
+
       </div>
 
       <div class="avatarMove">
@@ -29,10 +31,15 @@
       <!-- Update the ConfirmationModal component usage -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete"
         :taskId="getTaskId()" />
+      
+        <!-- HECHO -->
+        <CompleteModal :visible="completeVisible" @update:visible="handleVisibilityChangeComplete" @confirm2="confirmComplete"
+        :taskId="getTaskId()" />
 
       <!-- Modal para editar tarea -->
       <EditTaskModal v-if="taskToEdit" :visible="editVisible" :categorias="categorias" :task="taskToEdit"
         @update:visible="editVisible = $event" @edit-task="updateTask" />
+  
     </div>
 
     <div class="background-campo">
@@ -57,12 +64,12 @@
       </div>
 
       <!-- Audio -->
-      <div id="sound">
-        <Button type="button" value="sound" @click="playMusic"</Button>
-      </div>
-      <!-- <audio loop autoplay class="play-icon">
+      <!-- <div id="sound">
+        <Button type="button" value="sound" @click="playMusic" />
+      </div> -->
+      <audio loop autoplay class="play-icon">
         <source src="@/components/audio/flute.wav" type="audio/wav" >
-      </audio> -->
+      </audio> 
     </div>
  
   </div>
@@ -74,6 +81,7 @@ import ConfirmationModal from './ConfirmationModal.vue';
 import TaskCard from './TaskCard.vue';
 import TaskCreationModal from './TaskCreationModal.vue';
 import EditTaskModal from './EditTaskModal.vue';
+import CompleteModal from './CompleteModal.vue';
 import { useSelectedAvatarStore } from "@/stores/selectedAvatar";
 
 
@@ -94,7 +102,8 @@ export default {
     ConfirmationModal,
     TaskCard,
     TaskCreationModal,
-    EditTaskModal
+    EditTaskModal,
+    CompleteModal
   },
   data() {
     return {
@@ -103,11 +112,10 @@ export default {
       //https://node-todos.vercel.app/api-docs/#/todos
       loading: false,
 
-      tareas: [
-
-      ],
+      tareas: [],
 
       visible: false,
+      visible2: false,
       error: '',
       categorias: [
         { name: 'Personal', code: 'cat01' },
@@ -117,6 +125,7 @@ export default {
         { name: 'Otro', code: 'cat05' }
       ],
       confirmVisible: false,
+      completeVisible: false,
       deleteIndex: null,
       editVisible: false,
       taskToEdit: null,
@@ -199,9 +208,26 @@ export default {
       this.confirmVisible = false;
       this.deleteIndex = null;
     },
+
+    completarTarea(index) {
+    this.deleteIndex = index;
+    this.completeVisible = true; 
+    },
+
+    confirmComplete() {
+    this.tareas.splice(this.deleteIndex, 1);
+    this.completeVisible = false;
+    this.deleteIndex = null;
+    },
+ 
     handleVisibilityChange(newValue) {
       this.confirmVisible = newValue;
     },
+
+    handleVisibilityChangeComplete(newValue) {
+    this.completeVisible = newValue;
+    },
+    
     estiloParcela(index) {
       const imagenParcela = this.tareas.length > index ? '/imgs/germinada.png' : '/imgs/parcela.png';
       return {
@@ -215,9 +241,11 @@ export default {
         this.error = '';
       }
     },
+
     limpiarError() {
       this.error = '';
     },
+
     getTaskId() {
       if (this.deleteIndex !== null && this.tareas[this.deleteIndex]) {
         return this.tareas[this.deleteIndex].id;
@@ -359,8 +387,6 @@ button {
   border-radius: 5px;
 }
 
-
-
 .card {
   border: 1px solid #ccc;
   margin: 10px;
@@ -383,8 +409,11 @@ button {
 
 
 /* COW */
+
 .cow{
   position: relative;
+  height: 7rem;
+  width:7rem;
 }
 .cowMove {
     position: absolute;

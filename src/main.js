@@ -16,11 +16,12 @@ import Textarea from "primevue/textarea";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
+import Tooltip from 'primevue/tooltip';
 
 import ProgressSpinner from 'primevue/progressspinner';
 
 
-import { createMemoryHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 
 import Landing from "./components/Landing.vue";
 import Info from "./components/Info.vue";
@@ -52,7 +53,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 });
 
@@ -68,6 +69,7 @@ createApp(App)
   .component("Dropdown", Dropdown)
   .component("Textarea", Textarea)
   .component("Card", Card)
+  .component("Tooltip", Tooltip)
   .component("InputText", InputText)
   .component("Calendar", Calendar)
   .component("ProgressSpinner", ProgressSpinner)
