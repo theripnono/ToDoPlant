@@ -368,6 +368,7 @@ export default {
   box-sizing: border-box;
   /* Ensure padding is included in the height calculation */
   height: 60%;
+
 }
 
 .container {
@@ -383,6 +384,7 @@ export default {
   flex-direction: column;
   height: 100vh;
   width: 50%;
+  background-color: #f2f2f2;
 }
 
 .tareas h2,
@@ -513,5 +515,7 @@ button {
   90% {
     transform: translate(0vw, 0vh) scaleX(-1);
   }
+
+
 }
 </style>
