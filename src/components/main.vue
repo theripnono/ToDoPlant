@@ -13,10 +13,10 @@
         <h3>Tareas Actuales:</h3>
         <ProgressSpinner v-if="this.loading" style="width: 50px; height: 50px" strokeWidth="3" fill="transparent"
           animationDuration=".5s" aria-label="Custom ProgressSpinner" />
-      
-      
+
+
         <TaskCard v-for="(tarea, index) in tareas" :key="tarea.nombreTarea" :tarea="tarea" @delete="borrarTarea(index)"
-          @edit="openEditModal(tarea, index)"  @complete="completarTarea(index)"/>
+          @edit="openEditModal(tarea, index)" @complete="completarTarea(index)" />
 
       </div>
 
@@ -31,15 +31,15 @@
       <!-- Update the ConfirmationModal component usage -->
       <ConfirmationModal :visible="confirmVisible" @update:visible="handleVisibilityChange" @confirm="confirmDelete"
         :taskId="getTaskId()" />
-      
-        <!-- HECHO -->
-        <CompleteModal :visible="completeVisible" @update:visible="handleVisibilityChangeComplete" @confirm2="confirmComplete"
-        :taskId="getTaskId()" />
+
+      <!-- HECHO -->
+      <CompleteModal :visible="completeVisible" @update:visible="handleVisibilityChangeComplete"
+        @confirm="confirmComplete" :taskId="getTaskId()" />
 
       <!-- Modal para editar tarea -->
       <EditTaskModal v-if="taskToEdit" :visible="editVisible" :categorias="categorias" :task="taskToEdit"
         @update:visible="editVisible = $event" @edit-task="updateTask" />
-  
+
     </div>
 
     <div class="background-campo">
@@ -58,7 +58,7 @@
           <button @click="limpiarError" class="ok-button">OK</button>
         </div>
       </div>
-        <!-- COWS -->
+      <!-- COWS -->
       <div class="cow-container cowMove">
         <img src="@/components/imgs/animated_gifs/animated_cow.gif" alt="moving cow" class="cow">
       </div>
@@ -68,10 +68,10 @@
         <Button type="button" value="sound" @click="playMusic" />
       </div> -->
       <audio loop autoplay class="play-icon">
-        <source src="@/components/audio/flute.wav" type="audio/wav" >
-      </audio> 
+        <source src="@/components/audio/flute.wav" type="audio/wav">
+      </audio>
     </div>
- 
+
   </div>
 
 </template>
@@ -186,7 +186,7 @@ export default {
 
     openEditModal(task, index) {
       console.log('Tarea seleccionada para editar:', task); // Añade este log
-      
+
       this.taskToEdit = { ...task };
       this.editIndex = index;
       this.editVisible = true;
@@ -210,24 +210,24 @@ export default {
     },
 
     completarTarea(index) {
-    this.deleteIndex = index;
-    this.completeVisible = true; 
+      this.deleteIndex = index;
+      this.completeVisible = true;
     },
 
     confirmComplete() {
-    this.tareas.splice(this.deleteIndex, 1);
-    this.completeVisible = false;
-    this.deleteIndex = null;
+      this.tareas.splice(this.deleteIndex, 1);
+      this.completeVisible = false;
+      this.deleteIndex = null;
     },
- 
+
     handleVisibilityChange(newValue) {
       this.confirmVisible = newValue;
     },
 
     handleVisibilityChangeComplete(newValue) {
-    this.completeVisible = newValue;
+      this.completeVisible = newValue;
     },
-    
+
     estiloParcela(index) {
       const imagenParcela = this.tareas.length > index ? '/imgs/germinada.png' : '/imgs/parcela.png';
       return {
@@ -270,9 +270,9 @@ export default {
   created() {
     this.obtenerTareas()
   },
-  
+
   // audio button
-    playMusic(){
+  playMusic() {
     var music = new Audio('@/components/audio/flute.wav');
     music.play();
   }
@@ -410,16 +410,17 @@ button {
 
 /* COW */
 
-.cow{
+.cow {
   position: relative;
   height: 7rem;
-  width:7rem;
+  width: 7rem;
 }
+
 .cowMove {
-    position: absolute;
-    left: 70%;
-    bottom: 100px;
-    animation: cow-animation 30s ease-in-out infinite;
+  position: absolute;
+  left: 70%;
+  bottom: 100px;
+  animation: cow-animation 30s ease-in-out infinite;
 }
 
 
@@ -428,34 +429,44 @@ button {
   0% {
     transform: translate(0, 0) scaleX(1);
   }
-  10%{
+
+  10% {
     transform: translate(10vw, 10vh);
   }
-  20%{
+
+  20% {
     transform: translate(10vw, 10vh) scaleX(-1);
   }
-  30%{
+
+  30% {
     transform: translate(10vw, 0vh) scaleX(-1);
   }
-  40%{
+
+  40% {
     transform: translate(10vw, 0vh) scaleX(-1);
-  } 
-  50%{
+  }
+
+  50% {
     transform: translate(0vw, 10vh) scaleX(-1);
   }
-  60%{
+
+  60% {
     transform: translate(0vw, 10vh) scaleX(1);
   }
-  70%{
+
+  70% {
     transform: translate(10vw, 10vh) scaleX(1);
   }
-  75%{
+
+  75% {
     transform: translate(10vw, 10vh) scaleX(-1);
   }
-  80%{
+
+  80% {
     transform: translate(10vw, 10vh) scaleX(-1);
   }
-  90%{
+
+  90% {
     transform: translate(0vw, 0vh) scaleX(-1);
   }
 }
