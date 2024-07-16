@@ -48,6 +48,8 @@
 </style>
 
 <script>
+import { format } from 'date-fns';
+
 export default {
     props: {
         visible: {
@@ -76,6 +78,9 @@ export default {
                 console.log('Datos de la tarea recibidos en el modal:', newTask);
                 this.localTask = { ...newTask };
                 this.selectedCategory = newTask ? newTask.description : null;
+                if (newTask && newTask.createdAt) {
+                    this.localTask.createdAt = format(new Date(newTask.createdAt), 'dd/MM/yyyy');
+                }
                 console.log('Datos de localTask:', this.localTask);
             },
             immediate: true
@@ -103,8 +108,8 @@ export default {
                 console.log("TEXT ID: ", this.localTask.id)
                 console.log("TEXT: ", this.localTask.text)
                 console.log("TEXT DESCRIPTION: ", this.selectedCategory)
-                
-            
+
+
 
                 // Realiza el fetch PATCH aquí
                 let id = this.localTask.id
@@ -114,26 +119,26 @@ export default {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        id:this.localTask.id,
-                        text: this.localTask.text,       
+                        id: this.localTask.id,
+                        text: this.localTask.text,
                         description: this.selectedCategory,
                         completed: false,
-                        author:'pollo',
+                        author: 'pollo',
                         tags: ["beach"],
                         createdAt: "2020-03-10T04:05:06.157Z"
                     }),
-                    
+
                 })
-                
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Tarea actualizada:', data);
-                    this.$emit('edit-task', data);
-                    this.close();
-                })
-                .catch((error) => {
-                    console.error('Error al actualizar la tarea:', error);
-                });
+
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Tarea actualizada:', data);
+                        this.$emit('edit-task', data);
+                        this.close();
+                    })
+                    .catch((error) => {
+                        console.error('Error al actualizar la tarea:', error);
+                    });
             }
         },
         close() {
