@@ -260,7 +260,7 @@ export default {
       this.completeVisible = false;
       this.showGifCompleteVisible = true;
       this.deleteIndex = null;
-    },
+    }, 
 
     handleVisibilityChange(newValue) {
       this.confirmVisible = newValue;
