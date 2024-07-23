@@ -71,4 +71,5 @@ createApp(App)
   .component("Calendar", Calendar)
   .component("ProgressSpinner", ProgressSpinner)
   .component("font-awesome-icon", FontAwesomeIcon)
+  .directive("tooltip", Tooltip)
   .mount("#app");
