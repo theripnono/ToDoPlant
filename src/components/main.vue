@@ -65,9 +65,8 @@
       <div class="borde-campo"></div>
       <div class="campo">
         <div @click="() => console.log(index)" v-for="(parcela, index) in Array(20)" s :key="index" class="parcela"
-          :style="estiloParcela(index)"
-          ></div>
-      
+          :style="estiloParcela(index)" v-tooltip.top="infoParcela(index)"></div>
+
 
         <!-- IDEA TOOLTIP -->
         <!-- :data-parcela="index" para acceder a las parcelas. la ruta PointerEvent.target.dataset -->
@@ -102,6 +101,9 @@ import { useSelectedAvatarStore } from "@/stores/selectedAvatar";
 import ShowGifCompleteModal from './ShowGifCompleteModal.vue';
 
 import cowSoundFile from '@/components/audio/cow-mooing-loudly.mp3';
+
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale'
 
 
 const username = "aleh";
@@ -186,6 +188,9 @@ export default {
 
             text: task.nombreTarea,
             description: task.categoriaTarea.name,
+            tags: {
+              fecha: task.fecha
+            }
           }),
         })
           .then((response) => response.json())
@@ -274,10 +279,33 @@ export default {
       this.showGifCompleteVisible = newValue;
     },
 
+    infoParcela(index) {
+      const task = this.tareas[index];
+
+      if (!task) {
+        return 'Parcela vacía';
+      }
+
+      return `${task.text}. Dia de la cosecha ${format(new Date(task.tags.fecha), 'dd/MM/yyyy', { locale: es })}`;
+    },
+
     estiloParcela(index) {
-      const imagenParcela = this.tareas.length > index ? '/imgs/germinada.png' : '/imgs/parcela.png';
+      const task = this.tareas[index];
+
+      if (!task) {
+        return {
+          backgroundImage: `url(/imgs/parcela.png)`
+        }
+      }
+
+      if (new Date(task.tags.fecha) < new Date()) {
+        return {
+          backgroundImage: `url(/imgs/crecida.png)`
+        }
+      }
+
       return {
-        backgroundImage: `url(${imagenParcela})`,
+        backgroundImage: `url(/imgs/germinada.png)`,
       };
     },
     checkNumTareas() {
